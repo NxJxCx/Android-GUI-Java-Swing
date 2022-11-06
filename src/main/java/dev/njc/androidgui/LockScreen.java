@@ -203,7 +203,8 @@ public class LockScreen extends JPanel implements ActionListener {
         return this.bg_image_buffer;
     }
 
-    public void paintComponent(Graphics g) {
+    @Override
+    protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(new IconToImage(this.bgImage).getImage(),(this.getParentFrame().getWidth()/2)-(this.bgImage.getIconWidth()/2),(this.getParentFrame().getHeight()/2)-(this.bgImage.getIconHeight()/2),this);
         Image overlayimg = BackgroundImagePaths.LockOverlayImage.loadImage();
