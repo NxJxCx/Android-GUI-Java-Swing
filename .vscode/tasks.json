@@ -1,0 +1,17 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build and Run Java Program",
+            "type": "shell",
+            "command": "cd ${workspaceFolder} && dir /s /B *.java > sources.txt && del /f /s /a *.class && del /f /s /a *.jar && javac -d ./build/classes @sources.txt && jar cfm ./build/android-gui-java-swing-1.0.jar ./Manifest.txt -C ./build/classes . && java -jar ./build/android-gui-java-swing-1.0.jar",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}
