@@ -22,12 +22,18 @@ public class HomeScreen extends JPanel {
         this.bg_image_buffer = img;
         this.parent_frame = parentFrame;
         this.installed_apps = new AndroidApp[12]; // limit apps installs to 12 apps
+        this.showMenu();
     }
 
     public HomeScreen(JFrame parentFrame, BufferedImage backgroundImageBuffer) {
         this.bg_image_buffer = backgroundImageBuffer;
         this.parent_frame = parentFrame;
         this.installed_apps = new AndroidApp[12]; // limit apps installs to 12 apps
+        this.showMenu();
+    }
+
+    public void showMenu() {
+        this.add(new JLabel("THIS IS THE HOME LAUNCHER"));
     }
 
     // methods

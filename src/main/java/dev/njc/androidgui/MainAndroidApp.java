@@ -30,9 +30,12 @@ public class MainAndroidApp extends JFrame implements Runnable {
     private void switch_to_panel(AndroidHomeLockPanels currentPanel) {
         if (currentPanel == this.current_panel)
             return;
-        this.current_panel = currentPanel;        
+        this.getContentPane().removeAll();
+        this.current_panel = currentPanel; 
         JPanel panel = currentPanel==AndroidHomeLockPanels.HomePanel ? this.homepanel : this.lockpanel;
+        this.getContentPane().repaint();
         setContentPane(panel);
+        this.getContentPane().repaint();
     }
 
     // public methods
@@ -59,7 +62,7 @@ public class MainAndroidApp extends JFrame implements Runnable {
 
     /** switch panels between home and lock screen **/
     public void switch_panel() {
-        if (this.current_panel == AndroidHomeLockPanels.HomePanel)
+        if (this.current_panel == AndroidHomeLockPanels.LockPanel)
             this.switch_to_panel(AndroidHomeLockPanels.HomePanel);
         else
             this.switch_to_panel(AndroidHomeLockPanels.LockPanel);
