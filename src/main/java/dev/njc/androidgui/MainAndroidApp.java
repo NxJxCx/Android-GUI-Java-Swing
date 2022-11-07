@@ -17,7 +17,7 @@ public class MainAndroidApp extends JFrame implements Runnable {
     // constructor
     public MainAndroidApp(String ownerName, String passLock) {
         this.homepanel = new HomeScreen(this, BackgroundImagePaths.HomeScreenImage.loadImage());
-        this.lockpanel = new LockScreen(this, normalizeString(ownerName), normalizeString(passLock), BackgroundImagePaths.HomeScreenImage.loadImage());
+        this.lockpanel = new LockScreen(this, normalizeString(ownerName), normalizeString(passLock), BackgroundImagePaths.LockScreenImage.loadImage());
         setTitle("Android GUI Imitator by NJC - " + normalizeString(ownerName));
         setSize(fixwidth, fixheight);
         setMinimumSize(fixsize);
@@ -116,7 +116,8 @@ enum BackgroundImagePaths {
     
     HomeScreenImage("./res/images/homescreen.jpg"),
     LockScreenImage("./res/images/lockscreen.jpg"),
-    LockOverlayImage("./res/images/lockoverlay.png");
+    LockOverlayImage("./res/images/lockoverlay.png"),
+    NumberOverlayImage("./res/images/numoverlay.png");
 
     private String pathname;
     private BackgroundImagePaths(String path) {

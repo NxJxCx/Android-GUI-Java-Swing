@@ -1,6 +1,8 @@
 package dev.njc.androidgui;
 
 import javax.swing.*;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -23,6 +25,8 @@ public class LockScreen extends JPanel implements ActionListener {
     private JPanel gridcontainer;
     private ImageIcon bgImage;
     private JButton current_panel;
+    private Dimension resized_size;
+    private Image bg_resized_orig, bg_resized_overlay;
 
     public LockScreen(MainAndroidApp parentFrame, String ownerName, String passLock, String backgroundImagePath) {
         BufferedImage img;
@@ -37,6 +41,12 @@ public class LockScreen extends JPanel implements ActionListener {
         this.owner_name = ownerName;
         this.pass_lock = passLock;
         this.bgImage = new ImageIcon(this.bg_image_buffer);
+        Image original = new IconToImage(this.bgImage).getImage();
+        Image overlayimg = BackgroundImagePaths.LockOverlayImage.loadImage();
+        float ratio = (float) this.bgImage.getIconWidth()/this.bgImage.getIconHeight();
+        this.resized_size = new Dimension((int)(this.getParentFrame().getFixHeight()*ratio), this.getParentFrame().getFixHeight());
+        this.bg_resized_orig = original.getScaledInstance((int)this.resized_size.getWidth(), (int)this.resized_size.getHeight(), Image.SCALE_SMOOTH);
+        this.bg_resized_overlay = overlayimg.getScaledInstance(this.getParentFrame().getFixWidth(), this.getParentFrame().getFixHeight(), Image.SCALE_SMOOTH);
         this.setOpaque(false);
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setPanels();
@@ -48,6 +58,12 @@ public class LockScreen extends JPanel implements ActionListener {
         this.owner_name = ownerName;
         this.pass_lock = passLock;
         this.bgImage = new ImageIcon(this.bg_image_buffer);
+        Image original = new IconToImage(this.bgImage).getImage();
+        Image overlayimg = BackgroundImagePaths.LockOverlayImage.loadImage();
+        float ratio = (float) this.bgImage.getIconWidth()/this.bgImage.getIconHeight();
+        this.resized_size = new Dimension((int)(this.getParentFrame().getFixHeight()*ratio), this.getParentFrame().getFixHeight());
+        this.bg_resized_orig = original.getScaledInstance((int)this.resized_size.getWidth(), (int)this.resized_size.getHeight(), Image.SCALE_SMOOTH);
+        this.bg_resized_overlay = overlayimg.getScaledInstance(this.getParentFrame().getFixWidth(), this.getParentFrame().getFixHeight(), Image.SCALE_SMOOTH);
         this.setOpaque(false);
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setPanels();
@@ -103,6 +119,7 @@ public class LockScreen extends JPanel implements ActionListener {
                 }
             }
         };
+        this.display_panel.removeActionListener(this);
         Timer animation = new Timer(15, animAction);
         animation.start();
     }
@@ -146,11 +163,11 @@ public class LockScreen extends JPanel implements ActionListener {
         ActionListener animAction = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (LockScreen.this.display_panel.equals(LockScreen.this.current_panel)) {
+                if (LockScreen.this.display_panel.getActionListeners().length>0) {
                     LockScreen.this.timerClock(timenow);
                 } else {
-                    ((Timer)e.getSource()).stop();
                     ((Timer)e.getSource()).removeActionListener(this);
+                    ((Timer)e.getSource()).stop();
                 }
             }
         };
@@ -161,7 +178,7 @@ public class LockScreen extends JPanel implements ActionListener {
         owner.setFont(new Font("Cambria", Font.TRUETYPE_FONT+Font.ITALIC+Font.BOLD, 18));
         descr.setFont(new Font("Cambria", Font.TRUETYPE_FONT+Font.ITALIC+Font.BOLD, 16));
         timenow.setForeground(new Color(50, 70, 240));
-        owner.setForeground(new Color(0, 0, 0));
+        owner.setForeground(new Color(200, 200, 250));
         descr.setForeground(new Color(255, 255, 255));
         boxtime.setOpaque(false);
         boxowner.setOpaque(false);
@@ -181,8 +198,8 @@ public class LockScreen extends JPanel implements ActionListener {
         boxowner.add(owner);
         boxowner.add(new JLabel("(Owner)") {
             {   // constructor
-                this.setFont(new Font("Cambria", 2, 16));
-                setForeground(new Color(0,0,0));
+                this.setFont(new Font("Cambria", Font.ITALIC, 16));
+                setForeground(new Color(220,220,220));
                 setAlignmentX(CENTER_ALIGNMENT);
                 setAlignmentY(CENTER_ALIGNMENT);
             }
@@ -263,27 +280,6 @@ public class LockScreen extends JPanel implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JButton myNumBtn = (JButton)e.getSource();
-                for (int i = 0; i < 10; i++) {
-                    if (myNumBtn.getName().equals("Button #" + i)) {
-                        String thepass = new String(inputTextbox.getPassword());
-                        inputTextbox.setText(thepass + i);
-                        if (myNumBtn.isFocusOwner()) {
-                            Timer animate = new Timer(35, new ActionListener() {
-
-                                @Override
-                                public void actionPerformed(ActionEvent e) {
-                                    myNumBtn.setForeground(new Color(0, 100, 0));
-                                }
-                            });
-                            myNumBtn.setForeground(new Color(255, 255, 255));
-                            animate.setRepeats(false);
-                            animate.setInitialDelay(15);
-                            animate.start();
-                            inputTextbox.requestFocus();
-                        }
-                        return;
-                    }
-                }
                 if (myNumBtn.getName().equals("delete")) {
                     char[] passcode = inputTextbox.getPassword();
                     if (passcode.length>0) {
@@ -293,38 +289,56 @@ public class LockScreen extends JPanel implements ActionListener {
                         }
                         inputTextbox.setText(newpasscode.length > 0 ? new String(newpasscode) : "");
                     }
-                    if (myNumBtn.isFocusOwner()) {
-                        Timer animate = new Timer(35, new ActionListener() {
-    
-                            @Override
-                            public void actionPerformed(ActionEvent e) {
-                                myNumBtn.setForeground(new Color(0, 100, 0));
-                            }
-                        });
-                        myNumBtn.setForeground(new Color(255, 255, 255));
-                        animate.setRepeats(false);
-                        animate.setInitialDelay(15);
-                        animate.start();
-                        inputTextbox.requestFocus();
-                    }
+                } else {
+                    String thepass = new String(inputTextbox.getPassword());
+                    inputTextbox.setText(thepass + myNumBtn.getName());
                 }
-                
+                inputTextbox.requestFocus();
             }
         };
+        ImageIcon oicon = new ImageIcon(BackgroundImagePaths.NumberOverlayImage.loadImage());
+        Image original = new IconToImage(oicon).getImage();
+        float ratio = (float) oicon.getIconWidth()/oicon.getIconHeight();
         for (int i = 0; i < 10; i++) {
-            numbers[i] = new JButton("" + i);
+            numbers[i] = new JButton("" + i) {
+                private Image myimgOk;
+                {this.myimgOk = null;}
+                @Override
+                protected void paintComponent(Graphics gg) {
+                    if (this.myimgOk == null) {
+                        this.myimgOk = original.getScaledInstance((int)(getHeight()*ratio), (int)(getHeight()), Image.SCALE_SMOOTH);
+                        gg.drawImage(this.myimgOk, getParent().getX(), getParent().getY(),this);
+                    } else {
+                        gg.drawImage(this.myimgOk, getParent().getX(), getParent().getY(),this);
+                    }
+                    super.paintComponent(gg);
+                }
+            };
             numbers[i].setFont(new Font("Cambria", Font.BOLD+Font.TRUETYPE_FONT, 50));
-            numbers[i].setName("Button #" + i);
-            numbers[i].setForeground(new Color(0, 100, 0));
+            numbers[i].setName("" + i);
+            numbers[i].setForeground(new Color(50, 220, 50));
             numbers[i].setBorderPainted(false);
             numbers[i].setContentAreaFilled(false);
             numbers[i].setFocusPainted(false);
             numbers[i].addActionListener(numberListener);
         }
-        numbers[10] = new JButton("<X]");
-        numbers[10].setFont(new Font("Courier New", Font.BOLD, 20));
+        numbers[10] = new JButton("<X]") {
+            private Image myimgOk;
+            {this.myimgOk = null;}
+            @Override
+            protected void paintComponent(Graphics gg) {
+                if (this.myimgOk == null) {
+                    this.myimgOk = original.getScaledInstance((int)(getHeight()*ratio), (int)(getHeight()), Image.SCALE_SMOOTH);
+                    gg.drawImage(this.myimgOk, getParent().getX(), getParent().getY(),this);
+                } else {
+                    gg.drawImage(this.myimgOk, getParent().getX(), getParent().getY(),this);
+                }
+                super.paintComponent(gg);
+            }
+        };
+        numbers[10].setFont(new Font("Courier New", Font.BOLD+Font.TRUETYPE_FONT, 20));
         numbers[10].setName("delete");
-        numbers[10].setForeground(new Color(0, 100, 0));
+        numbers[10].setForeground(new Color(50, 220, 50));
         numbers[10].setBorderPainted(false);
         numbers[10].setContentAreaFilled(false);
         numbers[10].setFocusPainted(false);
@@ -384,11 +398,9 @@ public class LockScreen extends JPanel implements ActionListener {
 
     @Override
     protected void paintComponent(Graphics g) {
+        g.drawImage(this.bg_resized_orig, (this.getParentFrame().getWidth()/2)-((int)(this.resized_size.getWidth()/2)),(this.getParentFrame().getHeight()/2)-((int)(this.resized_size.getHeight()/2)),this);
+        g.drawImage(this.bg_resized_overlay, 0, 0, this);
         super.paintComponent(g);
-        g.drawImage(new IconToImage(this.bgImage).getImage(),(this.getParentFrame().getWidth()/2)-(this.bgImage.getIconWidth()/2),(this.getParentFrame().getHeight()/2)-(this.bgImage.getIconHeight()/2),this);
-        Image overlayimg = BackgroundImagePaths.LockOverlayImage.loadImage();
-        Image resizedoverlay = overlayimg.getScaledInstance(this.getParentFrame().getFixWidth(), this.getParentFrame().getFixHeight(), Image.SCALE_SMOOTH);
-        g.drawImage(resizedoverlay,0,0,this);
     }
 
     @Override
