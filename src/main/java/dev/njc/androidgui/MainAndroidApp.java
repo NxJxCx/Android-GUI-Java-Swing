@@ -11,16 +11,16 @@ import java.awt.image.*;
 public class MainAndroidApp extends JFrame implements Runnable {
     private JPanel homepanel, lockpanel;
     private AndroidHomeLockPanels current_panel;
-    private int fixwidth = 480, fixheight = 956;
-    private Dimension fixsize = new Dimension(fixwidth, fixheight);
+    public static int fixWidth = 480, fixHeight = 956;
+    public static Dimension fixSize = new Dimension(MainAndroidApp.fixWidth, MainAndroidApp.fixHeight);
 
     // constructor
     public MainAndroidApp(String ownerName, String passLock) {
         this.homepanel = new HomeScreen(this, BackgroundImagePaths.HomeScreenImage.loadImage());
         this.lockpanel = new LockScreen(this, normalizeString(ownerName), normalizeString(passLock), BackgroundImagePaths.LockScreenImage.loadImage());
         setTitle("Android GUI Imitator by NJC - " + normalizeString(ownerName));
-        setSize(fixwidth, fixheight);
-        setMinimumSize(fixsize);
+        setSize(fixSize);
+        setMinimumSize(fixSize);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.switch_to_panel(AndroidHomeLockPanels.LockPanel);
     }
@@ -75,16 +75,6 @@ public class MainAndroidApp extends JFrame implements Runnable {
 
     public JPanel lockScreenPanel() {
         return this.lockpanel;
-    }
-
-    public int getFixWidth() {
-        return this.fixwidth;
-    }
-    public int getFixHeight() {
-        return this.fixheight;
-    }
-    public Dimension getFixSize() {
-        return this.fixsize;
     }
     // setter
 
