@@ -249,7 +249,6 @@ public class LockScreen extends JPanel implements ActionListener {
         inputTextbox.setMargin(new Insets(0,100,0,100));
         inputTextbox.setHorizontalAlignment(JTextField.CENTER);
         inputTextbox.setBorder(null);
-        inputTextbox.setActionCommand("inputPassword");
         inputTextbox.getDocument().addDocumentListener(new DocumentListener() {
 
             @Override
