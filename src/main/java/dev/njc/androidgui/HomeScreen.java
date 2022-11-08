@@ -25,6 +25,7 @@ public class HomeScreen extends JPanel implements ActionListener, MouseListener 
     private JPanel screenContainer;
 
     public HomeScreen(MainAndroidApp parentFrame, String backgroundImagePath) {
+        super();
         BufferedImage img;
         try {
             img = ImageIO.read(new File(backgroundImagePath));
@@ -53,6 +54,7 @@ public class HomeScreen extends JPanel implements ActionListener, MouseListener 
     }
 
     public HomeScreen(MainAndroidApp parentFrame, BufferedImage backgroundImageBuffer) {
+        super();
         this.bg_image_buffer = backgroundImageBuffer;
         this.parent_frame = parentFrame;
         this.installed_apps = new ArrayList<AndroidApp>();
@@ -278,28 +280,74 @@ class HomeHeadPanel extends JPanel {
 
 class HomeBodyPanel extends JPanel {
     HomeScreen my_parent;
+    JPanel timerPanel, gridPanel;
+    JLabel timerLabel;
+    JPanel[] myContainer;
+    AndroidAppIcon[] emptySpaces;
     public HomeBodyPanel(HomeScreen parent) {
         super();
         this.my_parent = parent;
         setOpaque(false);
-        int bodyHeight = (MainAndroidApp.fixHeight-(MainAndroidApp.fixHeight/20));
-        int thisrows = (bodyHeight/(MainAndroidApp.fixWidth/5));
-        int thiscols = 5;
-        setLayout(new GridBagLayout());
-        //setMinimumSize(new Dimension(MainAndroidApp.fixWidth/cols, bodyHeight/rows));
-        //setMaximumSize(new Dimension(MainAndroidApp.fixWidth/cols, bodyHeight/rows));
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.fill = GridBagConstraints.BOTH;
-        gbc.anchor = GridBagConstraints.CENTER;
-        gbc.weightx = 1.0;
-        for (int i = 0; i < thiscols; i++) {
-            for (int j = 0; j < thisrows; i++) {
-                if (i == 5)
-                    gbc.gridwidth = GridBagConstraints.REMAINDER;
-                else
-                    gbc.gridwidth = GridBagConstraints.RELATIVE;
-                this.add(new JLabel("#" + i), gbc);
+        setLayout(new GridLayout(2, 1));
+        this.timerPanel = new JPanel();
+        this.gridPanel = new JPanel();
+        this.timerPanel.setLayout(new GridLayout(0, 1));
+        this.gridPanel.setLayout(new BoxLayout(this.gridPanel, BoxLayout.Y_AXIS));
+        this.timerPanel.setOpaque(false);
+        this.gridPanel.setOpaque(false);
+        this.add(this.timerPanel);
+        this.add(this.gridPanel);
+        this.timerPanel.add(new JLabel("00:00 AM") {
+            private Timer myTimer;
+            {   
+                setOpaque(false);
+                this.myTimer = new Timer(500, new MyActionListener(this));
+                this.myTimer.setInitialDelay(35);
+                this.myTimer.start();
+                this.setAlignmentX(CENTER_ALIGNMENT);
+                this.setHorizontalAlignment(SwingConstants.CENTER);
+                this.setHorizontalTextPosition(SwingConstants.CENTER);
+                this.setFont(new Font("Consolas", Font.BOLD, 72));
+                this.setForeground(new Color(0,20,50));
             }
+            class MyActionListener implements ActionListener {
+                private JLabel myParent;
+                MyActionListener(JLabel parent) {
+                    this.myParent = parent;
+                }
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (HomeBodyPanel.this.my_parent.isActionsEnabled()) {
+                        if (!this.myParent.getText().equals(MainAndroidApp.timerClock12H())) {
+                            this.myParent.setText(MainAndroidApp.timerClock12H());
+                        } else {
+                            this.myParent.setText(String.join(" ", MainAndroidApp.timerClock12H().split(":")));
+                        }
+                    }
+                }
+            }
+        });
+        int thiscols = 4;
+        int thisrows = (MainAndroidApp.fixHeight/2)/(MainAndroidApp.fixWidth/thiscols);
+        this.emptySpaces = new AndroidAppIcon[thisrows*thiscols];
+        this.myContainer = new JPanel[thisrows];
+        for (int i = 0; i < thisrows; i++) {
+            this.myContainer[i] = new JPanel();
+            this.myContainer[i].setLayout(new GridLayout(1,thiscols));
+            this.myContainer[i].setOpaque(false);
+            for (int j = 0; j < thiscols; j++) {
+                this.emptySpaces[(thiscols*i)+j] = new AndroidAppIcon("Dummy#"+((int)((thiscols*i)+j)), this.my_parent);
+                this.myContainer[i].add(this.emptySpaces[(thiscols*i)+j]);
+            }
+        }
+
+        // test
+        AndroidApp testAndroid = new AndroidApp("Messages", BackgroundImagePaths.MessagesIcon.loadImage());
+        int randindx = (int)Math.floor(Math.random()*thisrows);
+        this.myContainer[randindx].remove(this.emptySpaces[randindx]);
+        this.myContainer[randindx].add(new AndroidAppIcon(testAndroid, this.my_parent));
+        for (JPanel p : this.myContainer) {
+            this.gridPanel.add(p);
         }
     }
 }

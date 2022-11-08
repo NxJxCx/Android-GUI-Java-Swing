@@ -15,11 +15,12 @@ public class MainAndroidApp extends JFrame implements Runnable {
     private HomeScreen homepanel;
     private LockScreen lockpanel;
     private AndroidHomeLockPanels current_panel;
-    public static int fixWidth = 480, fixHeight = 956;
-    public static Dimension fixSize = new Dimension(MainAndroidApp.fixWidth, MainAndroidApp.fixHeight);
+    public final static int fixWidth = 480, fixHeight = 956;
+    public final static Dimension fixSize = new Dimension(MainAndroidApp.fixWidth, MainAndroidApp.fixHeight);
 
     // constructor
     public MainAndroidApp(String ownerName, String passLock) {
+        super();
         this.homepanel = new HomeScreen(this, BackgroundImagePaths.HomeScreenImage.loadImage());
         this.lockpanel = new LockScreen(this, normalizeString(ownerName), normalizeString(passLock), BackgroundImagePaths.LockScreenImage.loadImage());
         setTitle("Android GUI Imitator by NJC - " + normalizeString(ownerName));
@@ -143,7 +144,8 @@ enum BackgroundImagePaths {
     HomeScreenImage("./res/images/homescreen.jpg"),
     LockScreenImage("./res/images/lockscreen.jpg"),
     LockOverlayImage("./res/images/lockoverlay.png"),
-    NumberOverlayImage("./res/images/numoverlay.png");
+    NumberOverlayImage("./res/images/numoverlay.png"),
+    MessagesIcon("./res/images/icons/messages.png");
 
     private String pathname;
     private BackgroundImagePaths(String path) {
