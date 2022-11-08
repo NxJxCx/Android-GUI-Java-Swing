@@ -1,6 +1,7 @@
 package dev.njc.androidgui;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -11,6 +12,9 @@ public class AndroidApp extends JFrame implements ActionListener {
     private String app_name;
     private BufferedImage app_icon_buffer;
     private ImageIcon app_image_icon;
+    private AndroidAppIcon my_app_icon;
+    private HomeScreen my_home;
+    private boolean installed;
 
     public AndroidApp(String appName, String appIconPath) {
         super();
@@ -32,6 +36,7 @@ public class AndroidApp extends JFrame implements ActionListener {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
+    // static methods
     public static BufferedImage loadImage(String pathname) {
         BufferedImage img;
         try {
@@ -43,10 +48,16 @@ public class AndroidApp extends JFrame implements ActionListener {
         }
         return img;
     }
+
     // methods
-    public void install(JPanel homepanel) {
-        // TODO: display an icon in homepanel of this app
+    public AndroidAppIcon install(HomeScreen homescreen) {
+        this.my_home = homescreen;
+        this.my_app_icon = new AndroidAppIcon(this, homescreen);
+        this.installed = true;
+        homescreen.getInstalledApps().add(this);
+        return this.my_app_icon;
     }
+
     // getter
     public String getAppName() {
         return this.app_name;
@@ -57,9 +68,20 @@ public class AndroidApp extends JFrame implements ActionListener {
     public ImageIcon getAppImageIcon() {
         return this.app_image_icon;
     }
+    public AndroidAppIcon getAndroidAppIcon() {
+        return this.installed ? this.my_app_icon : null;
+    }
+    public HomeScreen getHomeScreen() {
+        return this.installed ? this.my_home : null;
+    }
+    public boolean isAppInstalled() {
+        return this.installed;
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        
+        if (((Component)e.getSource()).getName().equals(this.app_name+"_icon")) {
+            System.out.println(this.my_home.getInstalledApps().size());
+        }
     }
 }

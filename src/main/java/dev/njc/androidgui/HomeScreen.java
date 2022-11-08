@@ -19,7 +19,8 @@ public class HomeScreen extends JPanel implements ActionListener, MouseListener 
     private Dimension resized_size;
     private Image bg_resized_orig;
     private boolean enable_actions;
-    private JPanel headPanel, bodyPanel;
+    private HomeHeadPanel headPanel;
+    private HomeBodyPanel bodyPanel;
     private long timeClicked;
     private AtomicInteger counterClicked;
     private JPanel screenContainer;
@@ -51,6 +52,11 @@ public class HomeScreen extends JPanel implements ActionListener, MouseListener 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.screenContainer.add(this.headPanel);
         this.screenContainer.add(this.bodyPanel);
+        // install apps
+        AndroidApp messagesApp = new AndroidApp("Messages", BackgroundImagePaths.MessagesIcon.loadImage());
+        AndroidApp phoneApp = new AndroidApp("Phone", BackgroundImagePaths.PhoneIcon.loadImage());
+        this.installApp(messagesApp);
+        this.installApp(phoneApp);
     }
 
     public HomeScreen(MainAndroidApp parentFrame, BufferedImage backgroundImageBuffer) {
@@ -73,6 +79,11 @@ public class HomeScreen extends JPanel implements ActionListener, MouseListener 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.screenContainer.add(this.headPanel, BorderLayout.BEFORE_FIRST_LINE);
         this.screenContainer.add(this.bodyPanel, BorderLayout.CENTER);
+        // install apps
+        AndroidApp messagesApp = new AndroidApp("Messages", BackgroundImagePaths.MessagesIcon.loadImage());
+        AndroidApp phoneApp = new AndroidApp("Phone", BackgroundImagePaths.PhoneIcon.loadImage());
+        this.installApp(messagesApp);
+        this.installApp(phoneApp);
     }
 
     // methods
@@ -85,8 +96,7 @@ public class HomeScreen extends JPanel implements ActionListener, MouseListener 
                 return;
             }
         }
-        app.install(this);
-        this.installed_apps.add(app);
+        this.bodyPanel.installApp(app, this);
     }
 
     public void resetHomeDisplay(boolean actionEnabled) {
@@ -130,6 +140,9 @@ public class HomeScreen extends JPanel implements ActionListener, MouseListener 
     }
     public boolean isActionsEnabled() {
         return this.enable_actions;
+    }
+    public ArrayList<AndroidApp> getInstalledApps() {
+        return this.installed_apps;
     }
 
     // setter
@@ -282,7 +295,7 @@ class HomeBodyPanel extends JPanel {
     HomeScreen my_parent;
     JPanel timerPanel, gridPanel;
     JLabel timerLabel;
-    JPanel[] myContainer;
+    JPanel[] myContainer, gridCards;
     AndroidAppIcon[] emptySpaces;
     public HomeBodyPanel(HomeScreen parent) {
         super();
@@ -327,27 +340,36 @@ class HomeBodyPanel extends JPanel {
                 }
             }
         });
-        int thiscols = 4;
+        int thiscols = 5;
         int thisrows = (MainAndroidApp.fixHeight/2)/(MainAndroidApp.fixWidth/thiscols);
         this.emptySpaces = new AndroidAppIcon[thisrows*thiscols];
+        this.gridCards = new JPanel[thisrows*thiscols];
         this.myContainer = new JPanel[thisrows];
         for (int i = 0; i < thisrows; i++) {
             this.myContainer[i] = new JPanel();
             this.myContainer[i].setLayout(new GridLayout(1,thiscols));
             this.myContainer[i].setOpaque(false);
             for (int j = 0; j < thiscols; j++) {
-                this.emptySpaces[(thiscols*i)+j] = new AndroidAppIcon("Dummy#"+((int)((thiscols*i)+j)), this.my_parent);
-                this.myContainer[i].add(this.emptySpaces[(thiscols*i)+j]);
+                this.gridCards[(thiscols*i)+j] = new JPanel() {
+                    {
+                        setLayout(new CardLayout());
+                        setOpaque(false);
+                    }
+                };
+                this.emptySpaces[(thiscols*i)+j] = new AndroidAppIcon(" ", this.my_parent);
+                this.gridCards[(thiscols*i)+j].add(this.emptySpaces[(thiscols*i)+j]);
+                this.myContainer[i].add(this.gridCards[(thiscols*i)+j]);
             }
         }
-
-        // test
-        AndroidApp testAndroid = new AndroidApp("Messages", BackgroundImagePaths.MessagesIcon.loadImage());
-        int randindx = (int)Math.floor(Math.random()*thisrows);
-        this.myContainer[randindx].remove(this.emptySpaces[randindx]);
-        this.myContainer[randindx].add(new AndroidAppIcon(testAndroid, this.my_parent));
         for (JPanel p : this.myContainer) {
             this.gridPanel.add(p);
         }
+    }
+
+    public void installApp(AndroidApp app, HomeScreen home) {
+        int indx = this.my_parent.getInstalledApps().size();
+        this.gridCards[indx].add(app.install(home));
+        ((CardLayout)this.gridCards[indx].getLayout()).next(this.gridCards[indx]);
+        
     }
 }

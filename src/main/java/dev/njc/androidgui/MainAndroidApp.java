@@ -145,7 +145,8 @@ enum BackgroundImagePaths {
     LockScreenImage("./res/images/lockscreen.jpg"),
     LockOverlayImage("./res/images/lockoverlay.png"),
     NumberOverlayImage("./res/images/numoverlay.png"),
-    MessagesIcon("./res/images/icons/messages.png");
+    MessagesIcon("./res/images/icons/messages.png"),
+    PhoneIcon("./res/images/icons/phone.png");
 
     private String pathname;
     private BackgroundImagePaths(String path) {
