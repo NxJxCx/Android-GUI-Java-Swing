@@ -5,8 +5,6 @@ import javax.swing.JButton;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class AndroidAppIcon extends JButton {
     private AndroidApp app;
