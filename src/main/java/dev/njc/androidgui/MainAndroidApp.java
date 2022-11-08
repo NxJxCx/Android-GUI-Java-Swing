@@ -3,13 +3,17 @@ package dev.njc.androidgui;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.*;
 
 public class MainAndroidApp extends JFrame implements Runnable {
-    private JPanel homepanel, lockpanel;
+    private HomeScreen homepanel;
+    private LockScreen lockpanel;
     private AndroidHomeLockPanels current_panel;
     public static int fixWidth = 480, fixHeight = 956;
     public static Dimension fixSize = new Dimension(MainAndroidApp.fixWidth, MainAndroidApp.fixHeight);
@@ -34,14 +38,9 @@ public class MainAndroidApp extends JFrame implements Runnable {
         this.current_panel = currentPanel; 
         JPanel panel = currentPanel==AndroidHomeLockPanels.HomePanel ? this.homepanel : this.lockpanel;
         this.setContentPane(panel);  // change content JPanel of this JFrame
-    }
-
-    // public methods
-    /** show GUI. **/
-    public void showGUI() {
-        setResizable(false);
-        //setLocationRelativeTo(null);
-        setVisible(true);
+        if (currentPanel == AndroidHomeLockPanels.LockPanel)
+            this.lockpanel.resetLockDisplay();
+        this.homepanel.resetHomeDisplay(currentPanel == AndroidHomeLockPanels.HomePanel); 
     }
 
     // static methods
@@ -56,6 +55,35 @@ public class MainAndroidApp extends JFrame implements Runnable {
             str = string;
         }
         return str;
+    }
+
+    // return the time now in HH:mm:ss (24 Hour) format
+    public static String timerClock() {
+        LocalDateTime myDateObj = LocalDateTime.now();
+        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("HH:mm:ss");
+        String formattedDate = myDateObj.format(myFormatObj);
+        return formattedDate;
+    }
+    // return the time now in HH:mm AM/PM (12 Hour) format
+    public static String timerClock12H() {
+        String[] timenow = MainAndroidApp.timerClock().split(":");
+        int hour = Integer.parseInt(timenow[0]);
+        if (hour > 12) {
+            timenow[0] = "" + ((int)hour-12);
+            timenow[2] = "PM";
+        } else {
+            timenow[2] = "AM";
+        }
+        String formattedDate = String.join(":", timenow[0], String.join(" ", timenow[1], timenow[2]));
+        return formattedDate;
+    }
+
+    // public methods
+    /** show GUI. **/
+    public void showGUI() {
+        setResizable(false);
+        //setLocationRelativeTo(null);
+        setVisible(true);
     }
 
     /** switch panels between home and lock screen **/
@@ -92,6 +120,16 @@ public class MainAndroidApp extends JFrame implements Runnable {
     // main method
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new MainAndroidApp("Neil Jason Cañete", "0701"));
+    }
+
+    public void shutdownAndroid() {
+        System.out.println("shutting down Android...");
+        JPanel j = new JPanel();
+        JLabel h = new JLabel("Goodbye!");
+        j.setLayout(new BoxLayout(j, BoxLayout.Y_AXIS));
+        j.add(h);
+        this.setContentPane(j);
+        this.repaint();
     }
 
 }

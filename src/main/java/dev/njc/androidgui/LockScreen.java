@@ -13,8 +13,6 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -111,7 +109,6 @@ public class LockScreen extends JPanel implements ActionListener {
         this.gridcontainerPass.add(this.passlock_panel);
         this.add(this.gridcontainerDisp);
         this.add(this.gridcontainerPass);
-        this.switch_to_display();
     }
 
     private void switch_to_display() {
@@ -155,11 +152,29 @@ public class LockScreen extends JPanel implements ActionListener {
     }
 
     // public methods
-    public String timerClock() {
-        LocalDateTime myDateObj = LocalDateTime.now();
-        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("HH:mm:ss");
-        String formattedDate = myDateObj.format(myFormatObj);
-        return formattedDate;
+    public void resetLockDisplay() {
+        if (this.getComponentCount() == 0) {
+            this.add(this.gridcontainerDisp);
+            this.add(this.gridcontainerPass);   
+        }
+        this.switch_to_display();
+        /**
+        Timer timer = new Timer(1000, new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println(LockScreen.this.getComponentCount());
+                if (LockScreen.this.getComponentCount() == 0) {
+                    LockScreen.this.add(LockScreen.this.gridcontainerDisp);
+                    LockScreen.this.add(LockScreen.this.gridcontainerPass);   
+                }
+                LockScreen.this.switch_to_display();
+            }
+        });
+        timer.setInitialDelay(1000);
+        timer.setRepeats(false);
+        timer.start();
+        */
     }
 
     public void setWallPaper(String backgroundImagePath) {
@@ -191,12 +206,18 @@ public class LockScreen extends JPanel implements ActionListener {
     public BufferedImage getBackgroundImageBuffer() {
         return this.bg_image_buffer;
     }
+    public PassLockScreen getPassLockScreen() {
+        return this.passlock_panel;
+    }
+    public DisplayScreen getDisplayScreen() {
+        return this.display_panel;
+    }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(this.bg_resized_orig, (this.getParentFrame().getWidth()/2)-((int)(this.resized_size.getWidth()/2)),(this.getParentFrame().getHeight()/2)-((int)(this.resized_size.getHeight()/2)),this);
-        g.drawImage(this.bg_resized_overlay, 0, 0, this);
+        g.drawImage(this.bg_resized_orig, (MainAndroidApp.fixWidth/2)-((int)(this.resized_size.getWidth()/2)),(MainAndroidApp.fixHeight/2)-((int)(this.resized_size.getHeight()/2)),this);
+        g.drawImage(this.bg_resized_overlay, -5, -5, this);
         
     }
 
@@ -329,7 +350,7 @@ class PassLockScreen extends JButton {
                         String thepass = new String(inputTextBox.getPassword());
                         inputTextBox.setText(thepass + myNumBtn.getName());
                     }
-                    inputTextBox.requestFocus();
+                    inputTextBox.requestFocusInWindow();
                 }
             }
         };
@@ -379,17 +400,20 @@ class PassLockScreen extends JButton {
     }
 
     public void setActionsEnabled(boolean enable) {
-        this.enable_actions = enable;
-        if (enable == false) {
-            this.doc_pwd.removeDocumentListener(this.doc_listen);
-            for (int i = 0; i < 11; i++) {
-                this.numberBtns[i].removeActionListener(this.number_listen);
-            }
-            this.inputTextBox.setText("");
-        } else {
-            this.doc_pwd.addDocumentListener(this.doc_listen);
-            for (int i = 0; i < 11; i++) {
-                this.numberBtns[i].addActionListener(this.number_listen);
+        if (this.enable_actions != enable) {
+            this.enable_actions = enable;
+            if (enable == false) {
+                this.doc_pwd.removeDocumentListener(this.doc_listen);
+                for (int i = 0; i < 11; i++) {
+                    this.numberBtns[i].removeActionListener(this.number_listen);
+                }
+                this.inputTextBox.setText("");
+            } else {
+                this.doc_pwd.addDocumentListener(this.doc_listen);
+                for (int i = 0; i < 11; i++) {
+                    this.numberBtns[i].addActionListener(this.number_listen);
+                }
+                this.inputTextBox.requestFocusInWindow();
             }
         }
     }
@@ -434,11 +458,12 @@ class DisplayScreen extends JButton {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (enable_actions == true) {
-                    timenow.setText(lockscreen.timerClock());
+                    timenow.setText(MainAndroidApp.timerClock());
                 }
             }
         };
-        this.timerClockAnimator = new Timer(1000, this.anim_action);
+        this.timerClockAnimator = new Timer(500, this.anim_action);
+        this.timerClockAnimator.setInitialDelay(35);
         this.topspace.setFont(new Font("Arial Black", Font.BOLD, 140));
         this.space.setFont(new Font("Arial Black", Font.BOLD, 50));
         this.timenow.setFont(new Font("Courier New", Font.BOLD, 70));
@@ -449,7 +474,7 @@ class DisplayScreen extends JButton {
         this.descr.setForeground(new Color(255, 255, 255));
         this.timenow.setAlignmentX(CENTER_ALIGNMENT);
         this.timenow.setAlignmentY(CENTER_ALIGNMENT);
-        this.timenow.setText(lockscreen.timerClock());
+        this.timenow.setText(MainAndroidApp.timerClock());
         this.owner.setAlignmentX(CENTER_ALIGNMENT);
         this.owner.setAlignmentY(CENTER_ALIGNMENT);
         this.descr.setAlignmentX(CENTER_ALIGNMENT);
@@ -477,13 +502,15 @@ class DisplayScreen extends JButton {
     }
 
     public void setActionsEnabled(boolean enable) {
-        this.enable_actions = enable;
-        if (enable == false) {
-            this.timerClockAnimator.removeActionListener(this.anim_action);
-            this.timerClockAnimator.stop();
-        } else {
-            this.timerClockAnimator.addActionListener(this.anim_action);
-            this.timerClockAnimator.start();
+        if (this.enable_actions != enable) {
+            this.enable_actions = enable;
+            if (enable == false) {
+                this.timerClockAnimator.removeActionListener(this.anim_action);
+                this.timerClockAnimator.stop();
+            } else {
+                this.timerClockAnimator.addActionListener(this.anim_action);
+                this.timerClockAnimator.start();
+            }
         }
     }
 }
