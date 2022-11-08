@@ -53,10 +53,10 @@ public class HomeScreen extends JPanel implements ActionListener, MouseListener 
         this.screenContainer.add(this.headPanel);
         this.screenContainer.add(this.bodyPanel);
         // install apps
-        AndroidApp messagesApp = new AndroidApp("Messages", BackgroundImagePaths.MessagesIcon.loadImage());
         AndroidApp phoneApp = new AndroidApp("Phone", BackgroundImagePaths.PhoneIcon.loadImage());
-        this.installApp(messagesApp);
+        AndroidApp messagesApp = new AndroidApp("Messages", BackgroundImagePaths.MessagesIcon.loadImage());
         this.installApp(phoneApp);
+        this.installApp(messagesApp);
     }
 
     public HomeScreen(MainAndroidApp parentFrame, BufferedImage backgroundImageBuffer) {
@@ -80,10 +80,10 @@ public class HomeScreen extends JPanel implements ActionListener, MouseListener 
         this.screenContainer.add(this.headPanel, BorderLayout.BEFORE_FIRST_LINE);
         this.screenContainer.add(this.bodyPanel, BorderLayout.CENTER);
         // install apps
-        AndroidApp messagesApp = new AndroidApp("Messages", BackgroundImagePaths.MessagesIcon.loadImage());
         AndroidApp phoneApp = new AndroidApp("Phone", BackgroundImagePaths.PhoneIcon.loadImage());
-        this.installApp(messagesApp);
+        AndroidApp messagesApp = new AndroidApp("Messages", BackgroundImagePaths.MessagesIcon.loadImage());
         this.installApp(phoneApp);
+        this.installApp(messagesApp);
     }
 
     // methods

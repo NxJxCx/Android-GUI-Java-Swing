@@ -25,8 +25,8 @@ public class MainAndroidApp extends JFrame implements Runnable {
         this.lockpanel = new LockScreen(this, normalizeString(ownerName), normalizeString(passLock), BackgroundImagePaths.LockScreenImage.loadImage());
         setTitle("Android GUI Imitator by NJC - " + normalizeString(ownerName));
         setSize(fixSize);
-        setMinimumSize(fixSize);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
         this.switch_to_panel(AndroidHomeLockPanels.LockPanel);
     }
 
@@ -70,9 +70,11 @@ public class MainAndroidApp extends JFrame implements Runnable {
         String[] timenow = MainAndroidApp.timerClock().split(":");
         int hour = Integer.parseInt(timenow[0]);
         if (hour > 12) {
-            timenow[0] = "" + ((int)hour-12);
+            timenow[0] = "" + (hour-12);
             timenow[2] = "PM";
         } else {
+            if (hour == 0)
+                timenow[0] = "12";
             timenow[2] = "AM";
         }
         String formattedDate = String.join(":", timenow[0], String.join(" ", timenow[1], timenow[2]));

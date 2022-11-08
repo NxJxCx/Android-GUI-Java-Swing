@@ -22,8 +22,9 @@ public class AndroidApp extends JFrame implements ActionListener {
         this.app_icon_buffer = loadImage(appIconPath);
         this.app_image_icon = new ImageIcon(loadImage(appIconPath));
         setTitle(appName);
-        setSize(1200, 540);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setSize(MainAndroidApp.fixSize);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        setLocationRelativeTo(null);
     }
 
     public AndroidApp(String appName, BufferedImage appIconBuffer) {
@@ -32,8 +33,9 @@ public class AndroidApp extends JFrame implements ActionListener {
         this.app_icon_buffer = appIconBuffer;
         this.app_image_icon = new ImageIcon(appIconBuffer);
         setTitle(appName);
-        setSize(1200, 540);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setSize(MainAndroidApp.fixSize);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        setLocationRelativeTo(null);
     }
 
     // static methods
@@ -81,7 +83,9 @@ public class AndroidApp extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (((Component)e.getSource()).getName().equals(this.app_name+"_icon")) {
-            System.out.println(this.my_home.getInstalledApps().size());
+            System.out.println("Opening the app : " + this.app_name + " ...");
+            this.setLocation(this.my_home.getParentFrame().getX()+this.my_home.getParentFrame().getWidth(), this.my_home.getParentFrame().getY());
+            this.setVisible(true);
         }
     }
 }
