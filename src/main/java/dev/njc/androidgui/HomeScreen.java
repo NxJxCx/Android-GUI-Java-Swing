@@ -278,10 +278,28 @@ class HomeHeadPanel extends JPanel {
 
 class HomeBodyPanel extends JPanel {
     HomeScreen my_parent;
-
     public HomeBodyPanel(HomeScreen parent) {
         super();
-        setOpaque(false);
         this.my_parent = parent;
+        setOpaque(false);
+        int bodyHeight = (MainAndroidApp.fixHeight-(MainAndroidApp.fixHeight/20));
+        int thisrows = (bodyHeight/(MainAndroidApp.fixWidth/5));
+        int thiscols = 5;
+        setLayout(new GridBagLayout());
+        //setMinimumSize(new Dimension(MainAndroidApp.fixWidth/cols, bodyHeight/rows));
+        //setMaximumSize(new Dimension(MainAndroidApp.fixWidth/cols, bodyHeight/rows));
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.weightx = 1.0;
+        for (int i = 0; i < thiscols; i++) {
+            for (int j = 0; j < thisrows; i++) {
+                if (i == 5)
+                    gbc.gridwidth = GridBagConstraints.REMAINDER;
+                else
+                    gbc.gridwidth = GridBagConstraints.RELATIVE;
+                this.add(new JLabel("#" + i), gbc);
+            }
+        }
     }
 }
