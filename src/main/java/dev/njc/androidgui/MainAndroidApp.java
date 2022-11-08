@@ -33,9 +33,7 @@ public class MainAndroidApp extends JFrame implements Runnable {
         this.getContentPane().removeAll();
         this.current_panel = currentPanel; 
         JPanel panel = currentPanel==AndroidHomeLockPanels.HomePanel ? this.homepanel : this.lockpanel;
-        this.getContentPane().repaint();
-        setContentPane(panel);
-        this.getContentPane().repaint();
+        this.setContentPane(panel);  // change content JPanel of this JFrame
     }
 
     // public methods
