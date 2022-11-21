@@ -1,5 +1,6 @@
-package dev.njc.androidgui;
+package dev.njc.androidgui.gui;
 
+import dev.njc.androidgui.utils.IconToImage;
 import javax.swing.*;
 import javax.imageio.ImageIO;
 import java.awt.*;

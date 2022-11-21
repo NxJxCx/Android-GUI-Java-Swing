@@ -1,6 +1,7 @@
 package dev.njc.androidgui;
 
 import javax.swing.*;
+import dev.njc.androidgui.gui.MainAndroidApp;
 
 public class App {
     // for test purposes
@@ -10,6 +11,6 @@ public class App {
 
     // main method
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(new MainAndroidApp("Neil Jason Cañete", "0701"));                    }
+        SwingUtilities.invokeLater(new MainAndroidApp("Neil Jason Cañete", "0701"));                 }
 }
 

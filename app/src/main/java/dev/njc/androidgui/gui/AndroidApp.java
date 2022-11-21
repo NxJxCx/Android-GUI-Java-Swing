@@ -1,4 +1,4 @@
-package dev.njc.androidgui;
+package dev.njc.androidgui.gui;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,4 +1,4 @@
-package dev.njc.androidgui;
+package dev.njc.androidgui.gui;
 
 import java.io.File;
 import java.io.IOException;
