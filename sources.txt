@@ -1,6 +1,0 @@
-E:\njc\Android-GUI-Java-Swing\src\main\java\dev\njc\androidgui\AndroidApp.java
-E:\njc\Android-GUI-Java-Swing\src\main\java\dev\njc\androidgui\AndroidAppIcon.java
-E:\njc\Android-GUI-Java-Swing\src\main\java\dev\njc\androidgui\HomeScreen.java
-E:\njc\Android-GUI-Java-Swing\src\main\java\dev\njc\androidgui\IconToImage.java
-E:\njc\Android-GUI-Java-Swing\src\main\java\dev\njc\androidgui\LockScreen.java
-E:\njc\Android-GUI-Java-Swing\src\main\java\dev\njc\androidgui\MainAndroidApp.java

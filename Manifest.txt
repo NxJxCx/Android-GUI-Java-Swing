@@ -1,5 +1,0 @@
-Manifest-Version: 1.0  
-Built-By: Neil Jason Cañete
-Build-Jdk: 17.0.4
-Created-By: Java JDK for VSCode
-Main-Class: dev.njc.androidgui.MainAndroidApp

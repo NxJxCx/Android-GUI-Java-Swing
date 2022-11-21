@@ -116,15 +116,12 @@ public class MainAndroidApp extends JFrame implements Runnable {
     }
 
     // invoked on the event dispatching thread
+    @Override
     public void run() {
         showGUI();
     }
-    
-    // main method
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new MainAndroidApp("Neil Jason Cañete", "0701"));
-    }
 
+    // simulate android shutdown
     public void shutdownAndroid() {
         System.out.println("shutting down Android...");
         JPanel j = new JPanel();
