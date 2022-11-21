@@ -31,6 +31,12 @@ application {
     mainClass = 'dev.njc.androidgui.App'
 }
 
+jar {
+    manifest {
+        attributes 'Main-Class': 'dev.njc.androidgui.App'
+    }
+}
+
 tasks.named('test') {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
