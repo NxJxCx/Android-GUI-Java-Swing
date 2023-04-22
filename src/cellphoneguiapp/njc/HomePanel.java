@@ -114,6 +114,7 @@ public class HomePanel extends javax.swing.JPanel {
     final javax.swing.JButton backBtn = new javax.swing.JButton();
     final javax.swing.JButton homeBtn = new javax.swing.JButton();
 
+    setBackground(new java.awt.Color(0, 0, 0));
     setPreferredSize(new java.awt.Dimension(420, 750));
 
     topPanel.setBackground(new java.awt.Color(0, 153, 51));

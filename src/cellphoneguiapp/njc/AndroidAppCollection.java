@@ -13,8 +13,8 @@ import java.util.ArrayList;
  */
 public class AndroidAppCollection implements AndroidHomeOperations {
   private final HomePanel parentPanel;
-  private final ArrayList<AndroidApp> apps = new ArrayList<AndroidApp>();
-  private final ArrayList<String> openApps = new ArrayList<String>();
+  private final ArrayList<AndroidApp> apps = new ArrayList<>();
+  private final ArrayList<String> openApps = new ArrayList<>();
   
   public AndroidAppCollection(HomePanel parent_android) {
     parentPanel = parent_android;

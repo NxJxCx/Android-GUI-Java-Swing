@@ -50,6 +50,7 @@ public class AndroidApp extends AbstractAndroidApp {
     frame.setIconImage(Helper.iconToImage(new ImageIcon(Helper.getImage(app_name + ".png"))));
     frame.setSize(AndroidGUI.fixSize);
     frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+    frame.setBackground(Color.black);
     frame.addWindowListener(new WindowListener() {
       @Override
       public void windowOpened(WindowEvent e) {}
