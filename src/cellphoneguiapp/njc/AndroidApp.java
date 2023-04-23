@@ -65,7 +65,7 @@ public class AndroidApp extends AbstractAndroidApp {
     });
     frame.setResizable(false);
     frame.getContentPane().setBackground(Color.black);
-    frame.setAlwaysOnTop(true);
+//    frame.setAlwaysOnTop(true);
     frame.setLocationRelativeTo(null);
     frame.setLocationByPlatform(true);
   }

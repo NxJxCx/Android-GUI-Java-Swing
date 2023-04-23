@@ -320,6 +320,7 @@ public class HomePanel extends javax.swing.JPanel {
     bottomCallApp.setActionCommand("Call");
     bottomCallApp.setBorderPainted(false);
     bottomCallApp.setContentAreaFilled(false);
+    bottomCallApp.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
     bottomCallApp.setFocusPainted(false);
     bottomCallApp.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
     bottomCallApp.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/cellphoneguiapp/njc/resources/CallClicked.png"))); // NOI18N
@@ -333,6 +334,7 @@ public class HomePanel extends javax.swing.JPanel {
     bottomCameraApp.setActionCommand("Camera");
     bottomCameraApp.setBorderPainted(false);
     bottomCameraApp.setContentAreaFilled(false);
+    bottomCameraApp.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
     bottomCameraApp.setFocusPainted(false);
     bottomCameraApp.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
     bottomCameraApp.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/cellphoneguiapp/njc/resources/CameraClicked.png"))); // NOI18N
@@ -346,6 +348,7 @@ public class HomePanel extends javax.swing.JPanel {
     bottomMessagesApp.setActionCommand("Messages");
     bottomMessagesApp.setBorderPainted(false);
     bottomMessagesApp.setContentAreaFilled(false);
+    bottomMessagesApp.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
     bottomMessagesApp.setFocusPainted(false);
     bottomMessagesApp.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
     bottomMessagesApp.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/cellphoneguiapp/njc/resources/MessagesClicked.png"))); // NOI18N
@@ -385,6 +388,7 @@ public class HomePanel extends javax.swing.JPanel {
     shutdownBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cellphoneguiapp/njc/resources/optsBtn.png"))); // NOI18N
     shutdownBtn.setBorderPainted(false);
     shutdownBtn.setContentAreaFilled(false);
+    shutdownBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
     shutdownBtn.setFocusPainted(false);
     shutdownBtn.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/cellphoneguiapp/njc/resources/optsBtnClicked.png"))); // NOI18N
     shutdownBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -396,6 +400,7 @@ public class HomePanel extends javax.swing.JPanel {
     backBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cellphoneguiapp/njc/resources/backBtn.png"))); // NOI18N
     backBtn.setBorderPainted(false);
     backBtn.setContentAreaFilled(false);
+    backBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
     backBtn.setFocusPainted(false);
     backBtn.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/cellphoneguiapp/njc/resources/backBtnClicked.png"))); // NOI18N
     backBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -407,6 +412,7 @@ public class HomePanel extends javax.swing.JPanel {
     homeBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cellphoneguiapp/njc/resources/homeBtn.png"))); // NOI18N
     homeBtn.setBorderPainted(false);
     homeBtn.setContentAreaFilled(false);
+    homeBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
     homeBtn.setFocusPainted(false);
     homeBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
     homeBtn.setIconTextGap(0);
@@ -475,7 +481,7 @@ public class HomePanel extends javax.swing.JPanel {
         .addGroup(appsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(cameraApp, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addComponent(galleryApp, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
+        .addGap(70, 70, 70)
         .addComponent(bottomAppsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addComponent(operationPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -518,7 +524,7 @@ public class HomePanel extends javax.swing.JPanel {
           .addGroup(layout.createSequentialGroup()
             .addGap(122, 122, 122)
             .addComponent(displayName, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
-        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        .addGap(33, 33, 33))
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -561,7 +567,7 @@ public class HomePanel extends javax.swing.JPanel {
           }
           case 23 -> {
             ((javax.swing.Timer)e.getSource()).stop();
-            ((java.awt.CardLayout)container.getLayout()).next(container);
+            ((java.awt.CardLayout)container.getLayout()).first(container);
           }
         }
       }

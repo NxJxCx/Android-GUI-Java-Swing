@@ -5,6 +5,7 @@ import cellphoneguiapp.njc.utils.DataValue;
 import cellphoneguiapp.njc.utils.Helper;
 import cellphoneguiapp.njc.utils.LocalDatabase;
 import cellphoneguiapp.njc.utils.LocalDatabaseError;
+import java.awt.event.WindowEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -135,6 +136,15 @@ public class Messages extends javax.swing.JPanel {
     setBackground(new java.awt.Color(0, 0, 0));
     setForeground(new java.awt.Color(255, 255, 255));
     setOpaque(false);
+    addAncestorListener(new javax.swing.event.AncestorListener() {
+      public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+      }
+      public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+      }
+      public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+        formAncestorRemoved(evt);
+      }
+    });
     setLayout(new java.awt.CardLayout());
 
     messageLists.setBackground(new java.awt.Color(25, 25, 25));
@@ -225,7 +235,6 @@ public class Messages extends javax.swing.JPanel {
     backMessageBtn.setContentAreaFilled(false);
     backMessageBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
     backMessageBtn.setDefaultCapable(false);
-    backMessageBtn.setOpaque(false);
     backMessageBtn.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         backMessageBtnActionPerformed(evt);
@@ -310,7 +319,6 @@ public class Messages extends javax.swing.JPanel {
     emojiBtn.setForeground(new java.awt.Color(255, 255, 255));
     emojiBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cellphoneguiapp/njc/resources/emoticon_btn.png"))); // NOI18N
     emojiBtn.setToolTipText("");
-    emojiBtn.setActionCommand("");
     emojiBtn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.black, java.awt.Color.darkGray, java.awt.Color.black));
     emojiBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
     emojiBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -393,6 +401,7 @@ public class Messages extends javax.swing.JPanel {
 
   private void backMessageBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backMessageBtnActionPerformed
     ((java.awt.CardLayout)this.getLayout()).previous(this);
+    textMessage.setText("");
   }//GEN-LAST:event_backMessageBtnActionPerformed
 
   private void messageListViewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_messageListViewMouseClicked
@@ -465,8 +474,52 @@ public class Messages extends javax.swing.JPanel {
     frame.setAlwaysOnTop(true);
     frame.setLocationRelativeTo(this);
     frame.add(emoticonsPanel);
+    Messages thisPanel = this;
+    javax.swing.event.AncestorListener thslsnr = new javax.swing.event.AncestorListener() {
+      @Override
+      public void ancestorAdded(javax.swing.event.AncestorEvent evt) {}
+      @Override
+      public void ancestorMoved(javax.swing.event.AncestorEvent evt) {}
+      @Override
+      public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+        frame.dispose();
+        thisPanel.removeAncestorListener(this);
+      }
+    };
+    this.addAncestorListener(thslsnr);
+
+    frame.addWindowListener(new java.awt.event.WindowListener() {
+      @Override
+      public void windowOpened(WindowEvent e) { }
+
+      @Override
+      public void windowClosing(WindowEvent e) {}
+
+      @Override
+      public void windowClosed(WindowEvent e) {
+        thisPanel.removeAncestorListener(thslsnr);
+        frame.removeWindowListener(this);
+      }
+
+      @Override
+      public void windowIconified(WindowEvent e) { }
+
+      @Override
+      public void windowDeiconified(WindowEvent e) { }
+
+      @Override
+      public void windowActivated(WindowEvent e) { }
+
+      @Override
+      public void windowDeactivated(WindowEvent e) { }
+    });
     frame.setVisible(true);
   }//GEN-LAST:event_emojiBtnActionPerformed
+
+  private void formAncestorRemoved(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorRemoved
+    textMessage.setText("");
+    ((java.awt.CardLayout)getLayout()).first(this);
+  }//GEN-LAST:event_formAncestorRemoved
   
   
 

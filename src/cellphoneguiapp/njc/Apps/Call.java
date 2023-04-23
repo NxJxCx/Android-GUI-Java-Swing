@@ -49,6 +49,15 @@ public class Call extends javax.swing.JPanel {
 
     setBackground(new java.awt.Color(0, 0, 0));
     setOpaque(false);
+    addAncestorListener(new javax.swing.event.AncestorListener() {
+      public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+      }
+      public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+      }
+      public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+        formAncestorRemoved(evt);
+      }
+    });
     setLayout(new java.awt.CardLayout());
 
     callNumpadPanel.setBackground(new java.awt.Color(0, 0, 0));
@@ -219,10 +228,12 @@ public class Call extends javax.swing.JPanel {
     callBtn.setBackground(new java.awt.Color(102, 255, 102));
     callBtn.setFont(new java.awt.Font("Comic Sans MS", 0, 48)); // NOI18N
     callBtn.setForeground(new java.awt.Color(42, 42, 42));
-    callBtn.setText("Call");
+    callBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cellphoneguiapp/njc/resources/call_green_btn.png"))); // NOI18N
     callBtn.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+    callBtn.setContentAreaFilled(false);
     callBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
     callBtn.setFocusPainted(false);
+    callBtn.setOpaque(false);
     callBtn.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         callBtnActionPerformed(evt);
@@ -264,7 +275,7 @@ public class Call extends javax.swing.JPanel {
           .addGroup(numpadPanelLayout.createSequentialGroup()
             .addGap(133, 133, 133)
             .addComponent(callBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
-        .addContainerGap())
+        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
     numpadPanelLayout.setVerticalGroup(
       numpadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -289,9 +300,9 @@ public class Call extends javax.swing.JPanel {
           .addComponent(numAsterisk, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addComponent(numHash, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addComponent(num0, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addGap(30, 30, 30)
-        .addComponent(callBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addGap(45, 45, 45))
+        .addGap(36, 36, 36)
+        .addComponent(callBtn)
+        .addGap(20, 20, 20))
     );
 
     displayInputPanel.setBackground(new java.awt.Color(48, 48, 57));
@@ -306,16 +317,18 @@ public class Call extends javax.swing.JPanel {
     inputTextbox.setToolTipText("");
     inputTextbox.setActionCommand("<Not Set>");
     inputTextbox.setBorder(null);
+    inputTextbox.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
     inputTextbox.setOpaque(false);
 
     backspaceBtn.setBackground(new java.awt.Color(0, 0, 0));
     backspaceBtn.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
     backspaceBtn.setForeground(new java.awt.Color(255, 255, 255));
-    backspaceBtn.setText("<=");
+    backspaceBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cellphoneguiapp/njc/resources/backspace_btn.png"))); // NOI18N
     backspaceBtn.setToolTipText("");
     backspaceBtn.setActionCommand("");
     backspaceBtn.setBorder(null);
     backspaceBtn.setBorderPainted(false);
+    backspaceBtn.setContentAreaFilled(false);
     backspaceBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
     backspaceBtn.setDefaultCapable(false);
     backspaceBtn.setFocusPainted(false);
@@ -335,14 +348,15 @@ public class Call extends javax.swing.JPanel {
       displayInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(displayInputPanelLayout.createSequentialGroup()
         .addGap(71, 71, 71)
-        .addComponent(inputTextbox, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addComponent(inputTextbox, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addComponent(backspaceBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        .addComponent(backspaceBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+        .addContainerGap())
     );
     displayInputPanelLayout.setVerticalGroup(
       displayInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addComponent(backspaceBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-      .addComponent(inputTextbox, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
+      .addComponent(backspaceBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+      .addComponent(inputTextbox)
     );
 
     backspaceBtn.getAccessibleContext().setAccessibleName("backspaceBtn");
@@ -356,14 +370,12 @@ public class Call extends javax.swing.JPanel {
     callNumpadPanel.setLayout(callNumpadPanelLayout);
     callNumpadPanelLayout.setHorizontalGroup(
       callNumpadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(callNumpadPanelLayout.createSequentialGroup()
-        .addComponent(numpadPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addGap(0, 0, 0))
       .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, callNumpadPanelLayout.createSequentialGroup()
-        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        .addGap(170, 170, 170)
         .addComponent(callTitle)
         .addGap(158, 158, 158))
       .addComponent(displayInputPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+      .addComponent(numpadPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
     );
     callNumpadPanelLayout.setVerticalGroup(
       callNumpadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -372,7 +384,7 @@ public class Call extends javax.swing.JPanel {
         .addComponent(callTitle)
         .addGap(40, 40, 40)
         .addComponent(displayInputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addGap(0, 0, 0)
+        .addGap(1, 1, 1)
         .addComponent(numpadPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addGap(0, 0, 0))
     );
@@ -388,7 +400,9 @@ public class Call extends javax.swing.JPanel {
     callingIconImage.setBackground(new java.awt.Color(25, 25, 25));
     callingIconImage.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
     callingIconImage.setForeground(new java.awt.Color(255, 255, 255));
+    callingIconImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cellphoneguiapp/njc/resources/caller_image.png"))); // NOI18N
     callingIconImage.setText("Calling...");
+    callingIconImage.setToolTipText("");
     callingIconImage.setActionCommand("");
     callingIconImage.setBorderPainted(false);
     callingIconImage.setContentAreaFilled(false);
@@ -396,11 +410,15 @@ public class Call extends javax.swing.JPanel {
     callingIconImage.setFocusPainted(false);
     callingIconImage.setFocusable(false);
     callingIconImage.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-    callingIconImage.setIconTextGap(0);
-    callingIconImage.setOpaque(true);
+    callingIconImage.setIconTextGap(5);
     callingIconImage.setRequestFocusEnabled(false);
     callingIconImage.setVerticalAlignment(javax.swing.SwingConstants.TOP);
     callingIconImage.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+    callingIconImage.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        callingIconImageActionPerformed(evt);
+      }
+    });
 
     callingDisplayNumber.setBackground(new java.awt.Color(0, 0, 0));
     callingDisplayNumber.setFont(new java.awt.Font("Comic Sans MS", 0, 48)); // NOI18N
@@ -418,9 +436,13 @@ public class Call extends javax.swing.JPanel {
     endCallBtn.setBackground(new java.awt.Color(255, 55, 55));
     endCallBtn.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
     endCallBtn.setForeground(new java.awt.Color(255, 255, 255));
-    endCallBtn.setText("End");
+    endCallBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cellphoneguiapp/njc/resources/call_end_btn.png"))); // NOI18N
     endCallBtn.setBorderPainted(false);
+    endCallBtn.setContentAreaFilled(false);
+    endCallBtn.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/cellphoneguiapp/njc/resources/call_end_btn_disabled.png"))); // NOI18N
     endCallBtn.setFocusPainted(false);
+    endCallBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+    endCallBtn.setOpaque(false);
     endCallBtn.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         endCallBtnActionPerformed(evt);
@@ -430,39 +452,51 @@ public class Call extends javax.swing.JPanel {
     muteBtn.setBackground(new java.awt.Color(51, 51, 51));
     muteBtn.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
     muteBtn.setForeground(new java.awt.Color(255, 255, 255));
+    muteBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cellphoneguiapp/njc/resources/mute_btn.png"))); // NOI18N
     muteBtn.setText("Mute");
     muteBtn.setActionCommand("");
     muteBtn.setBorderPainted(false);
+    muteBtn.setContentAreaFilled(false);
+    muteBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
     muteBtn.setDefaultCapable(false);
     muteBtn.setFocusPainted(false);
     muteBtn.setFocusable(false);
     muteBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+    muteBtn.setOpaque(false);
     muteBtn.setVerticalAlignment(javax.swing.SwingConstants.TOP);
     muteBtn.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
     muteBtn1.setBackground(new java.awt.Color(51, 51, 51));
     muteBtn1.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
     muteBtn1.setForeground(new java.awt.Color(255, 255, 255));
+    muteBtn1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cellphoneguiapp/njc/resources/speaker_btn.png"))); // NOI18N
     muteBtn1.setText("Speaker");
     muteBtn1.setActionCommand("");
     muteBtn1.setBorderPainted(false);
+    muteBtn1.setContentAreaFilled(false);
+    muteBtn1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
     muteBtn1.setDefaultCapable(false);
     muteBtn1.setFocusPainted(false);
     muteBtn1.setFocusable(false);
     muteBtn1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+    muteBtn1.setOpaque(false);
     muteBtn1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
     muteBtn1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
     muteBtn2.setBackground(new java.awt.Color(51, 51, 51));
     muteBtn2.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
     muteBtn2.setForeground(new java.awt.Color(255, 255, 255));
+    muteBtn2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cellphoneguiapp/njc/resources/keypad_btn.png"))); // NOI18N
     muteBtn2.setText("Keypad");
     muteBtn2.setActionCommand("");
     muteBtn2.setBorderPainted(false);
+    muteBtn2.setContentAreaFilled(false);
+    muteBtn2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
     muteBtn2.setDefaultCapable(false);
     muteBtn2.setFocusPainted(false);
     muteBtn2.setFocusable(false);
     muteBtn2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+    muteBtn2.setOpaque(false);
     muteBtn2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
     muteBtn2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
@@ -483,11 +517,11 @@ public class Call extends javax.swing.JPanel {
                 .addComponent(muteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50)
                 .addGroup(callingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                  .addComponent(endCallBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                   .addGroup(callingPanelLayout.createSequentialGroup()
                     .addComponent(muteBtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(50, 50, 50)
-                    .addComponent(muteBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(muteBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                  .addComponent(endCallBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
               .addComponent(callingDisplayNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)))
           .addGroup(callingPanelLayout.createSequentialGroup()
             .addGap(134, 134, 134)
@@ -503,14 +537,14 @@ public class Call extends javax.swing.JPanel {
         .addComponent(callingDisplayNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addComponent(philLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addGap(79, 79, 79)
+        .addGap(60, 60, 60)
         .addGroup(callingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addComponent(muteBtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addComponent(muteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addComponent(muteBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addGap(90, 90, 90)
-        .addComponent(endCallBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addGap(76, 76, 76))
+        .addGap(70, 70, 70)
+        .addComponent(endCallBtn)
+        .addContainerGap())
     );
 
     add(callingPanel, "callingPage");
@@ -547,6 +581,15 @@ public class Call extends javax.swing.JPanel {
     }).start();
     
   }//GEN-LAST:event_endCallBtnActionPerformed
+
+  private void formAncestorRemoved(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorRemoved
+    inputTextbox.setText("");
+    ((java.awt.CardLayout)getLayout()).first(this);
+  }//GEN-LAST:event_formAncestorRemoved
+
+  private void callingIconImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_callingIconImageActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_callingIconImageActionPerformed
 
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
