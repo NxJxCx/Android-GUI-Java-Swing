@@ -6,7 +6,7 @@ package cellphoneguiapp.njc;
 
 /**
  *
- * @author canet
+ * @author Neil Jason Canete
  */
 public class ShutdownPanel extends javax.swing.JPanel {
 

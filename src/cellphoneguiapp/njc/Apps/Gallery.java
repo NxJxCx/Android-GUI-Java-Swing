@@ -1,12 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
+
 package cellphoneguiapp.njc.Apps;
 
 /**
  *
- * @author canet
+ * @author Neil Jason Canete
  */
 public class Gallery extends javax.swing.JPanel {
 
@@ -26,30 +23,28 @@ public class Gallery extends javax.swing.JPanel {
   // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
   private void initComponents() {
 
-    jLabel1 = new javax.swing.JLabel();
+    final javax.swing.JLabel gallery_content = new javax.swing.JLabel();
 
-    jLabel1.setText("Gallery");
+    gallery_content.setBackground(new java.awt.Color(0, 0, 0));
+    gallery_content.setForeground(new java.awt.Color(255, 255, 255));
+    gallery_content.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+    gallery_content.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cellphoneguiapp/njc/resources/gallery_screen.jpg"))); // NOI18N
+    gallery_content.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+    gallery_content.setIconTextGap(0);
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
     this.setLayout(layout);
     layout.setHorizontalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(layout.createSequentialGroup()
-        .addGap(174, 174, 174)
-        .addComponent(jLabel1)
-        .addContainerGap(210, Short.MAX_VALUE))
+      .addComponent(gallery_content)
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(layout.createSequentialGroup()
-        .addGap(82, 82, 82)
-        .addComponent(jLabel1)
-        .addContainerGap(653, Short.MAX_VALUE))
+      .addComponent(gallery_content)
     );
   }// </editor-fold>//GEN-END:initComponents
 
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
-  private javax.swing.JLabel jLabel1;
   // End of variables declaration//GEN-END:variables
 }

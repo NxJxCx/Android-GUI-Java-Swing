@@ -93,4 +93,15 @@ public class Helper {
     } 
   }
   
+  public static String DateToStringFormat(int day, int month, int year) {
+    java.time.LocalDate date = java.time.LocalDate.of(year, month, day);
+    java.time.format.DateTimeFormatter formatter = java.time.format.DateTimeFormatter.ofPattern("MMM d, yyyy");
+    return date.format(formatter);
+  }
+  
+  public static String DateToStringFormat() {
+    java.time.LocalDateTime now = LocalDateTime.now();
+    return DateToStringFormat(now.getDayOfMonth(), now.getMonthValue(), now.getYear());
+  }
+  
 }

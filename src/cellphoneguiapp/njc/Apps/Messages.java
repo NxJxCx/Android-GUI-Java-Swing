@@ -1,20 +1,117 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
+
 package cellphoneguiapp.njc.Apps;
+
+import cellphoneguiapp.njc.utils.DataValue;
+import cellphoneguiapp.njc.utils.Helper;
+import cellphoneguiapp.njc.utils.LocalDatabase;
+import cellphoneguiapp.njc.utils.LocalDatabaseError;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
- * @author canet
+ * @author Neil Jason Canete
  */
 public class Messages extends javax.swing.JPanel {
+  
+  private Integer selectedSenderID;
+  private final MessageContentsModel msgsModel = new MessageContentsModel("messages");
 
   /**
    * Creates new form Messages
    */
   public Messages() {
+    // initialize local custom database
+    java.util.Map<String, String> dblist_schema = new java.util.HashMap<>();
+    java.util.Map<String, String> dbmsg_schema = new java.util.HashMap<>();
+    dblist_schema.put("sender_name","string");
+    dblist_schema.put("number","string");
+    dbmsg_schema.put("sender_id", "int");
+    dbmsg_schema.put("sender_msg", "string");
+    dbmsg_schema.put("my_msg", "string");
+    dbmsg_schema.put("date", "string");
+    try {
+      new LocalDatabase("messageList", dblist_schema);
+      new LocalDatabase("messages", dbmsg_schema);
+      insertDataInDatabaseMessages(insertDataInDatabaseMessageList());
+    } catch (LocalDatabaseError err) {
+      System.err.println(err);
+    }
+    // initialize swing components
     initComponents();
+  }
+  
+  private java.util.List<Integer> insertDataInDatabaseMessageList() throws LocalDatabaseError {
+    java.util.List<Integer> resultIds = new java.util.ArrayList<>();
+    String[] fieldnames = {"sender_name", "number"};
+    String[] sndrnames = {"Neil", "James", "Madam", "Ermat", "Papa", "Ate D.", "Maam K", "Jonas"};
+    String[] mobilenumbers = {"09260432092", "09235616375", "091637632346", "09106293114", "094625126722", "091556261124", "096742532432", "09157341255"};
+    for (int i = 0; i < sndrnames.length; i++) {
+      java.util.Map<String, DataValue<?>> values = new java.util.HashMap<>();
+      for (int j = 0; j < fieldnames.length; j++) {
+        values.put(fieldnames[j], new DataValue<>(j == 0 ? sndrnames[i] : mobilenumbers[i]));
+      }
+      resultIds.add(LocalDatabase.DATABASES.get("messageList").insertRow(values));
+    }
+    
+    return resultIds;
+  }
+  
+  private void insertDataInDatabaseMessages(java.util.List<Integer> ids) throws LocalDatabaseError {
+    String[] fieldnames = {"sender_id", "sender_msg", "my_msg", "date"};
+    String[] sndr_msgs = {
+      "Hello!", "Hi, how are you?", "Kumusta man ka?", "Ganahan ka ba sa mga saging?", "Unsay imong trabaho?",
+      "Unsa imong pinaka-paboritong kanta?", "Kinsay imong paboritong artista?", "Kinsay imong paboritong artista?",
+      "Unsa imong paboritong luto?", "Unsay imong gikaon karon nga adlaw?", "Unsay imong mga hilig?",
+      "Asa ka nag-eskwela sa college?", "Nganong mas nindot man ang kinabuhi kung naa'y pag-amping sa kalikupan?"
+    };
+    java.util.ListIterator<Integer> ids_iter = ids.listIterator();
+    while (ids_iter.hasNext()) {
+      Integer _id = ids_iter.next();
+      java.util.Map<String, DataValue<?>> values = new java.util.HashMap<>();
+      for (String fieldname: fieldnames) {
+        switch (fieldname) {
+          case "sender_msg" -> {
+            int rndm = (int) (Math.random() * sndr_msgs.length);
+            values.put(fieldname, new DataValue<>(sndr_msgs[rndm]));
+          }
+          case "date" -> {
+            int yr = (int) (2021 + (Math.random() * 3));
+            int mnth = (int) (1 + (Math.random() * 11));
+            int day = (int) (1 + (Math.random() * 27));
+            values.put(fieldname, new DataValue<>(Helper.DateToStringFormat(day, mnth, yr)));
+          }
+          default -> {
+            values.put(fieldname, new DataValue<>(fieldname.equals("sender_id") ? _id : ""));
+          }
+        }
+      }
+      LocalDatabase.DATABASES.get("messages").insertRow(values);
+    }
+    
+  }
+  
+  public void setSelectedMessageID(int _id) {
+    selectedSenderID = _id;
+    msgsModel.setSenderID(_id);
+  }
+  
+  public Integer getSelectedMessageID() {
+    return selectedSenderID;
+  }
+  
+  public String getSenderDisplayName() {
+    if (selectedSenderID == null) {
+      return "(Unknown Sender)";
+    }
+    java.util.Map<String, DataValue<?>> dataResult =  LocalDatabase.DATABASES.get("messageList").selectRowById(selectedSenderID);
+    
+    return dataResult.get("sender_name").getString() + " (" + dataResult.get("number").getString() + ")";
+  }
+  
+  
+  public MessageContentsModel getMessagesModel() {
+    return msgsModel;
   }
 
   /**
@@ -26,78 +123,109 @@ public class Messages extends javax.swing.JPanel {
   // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
   private void initComponents() {
 
-    messageLists = new javax.swing.JPanel();
+    final javax.swing.JPanel messageLists = new javax.swing.JPanel();
     final javax.swing.JScrollPane messagesPanel = new javax.swing.JScrollPane();
     final javax.swing.JLabel title = new javax.swing.JLabel();
-    jButton1 = new javax.swing.JButton();
-    messagePanel = new javax.swing.JPanel();
-    jList1 = new javax.swing.JList<>();
+    final javax.swing.JPanel messagePanel = new javax.swing.JPanel();
+    final javax.swing.JButton backMessageBtn = new javax.swing.JButton();
+    final javax.swing.JScrollPane messageContent = new javax.swing.JScrollPane();
+    messages = new javax.swing.JList<>();
     final javax.swing.JScrollPane textMessageScroll = new javax.swing.JScrollPane();
 
     setBackground(new java.awt.Color(0, 0, 0));
     setForeground(new java.awt.Color(255, 255, 255));
+    setOpaque(false);
     setLayout(new java.awt.CardLayout());
 
     messageLists.setBackground(new java.awt.Color(25, 25, 25));
     messageLists.setForeground(new java.awt.Color(255, 255, 255));
     messageLists.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
     messageLists.setMaximumSize(new java.awt.Dimension(420, 750));
+    messageLists.setOpaque(false);
     messageLists.setPreferredSize(new java.awt.Dimension(420, 750));
 
+    messagesPanel.setBackground(new java.awt.Color(0, 0, 0));
+    messagesPanel.setForeground(new java.awt.Color(255, 255, 255));
     messagesPanel.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
     messagesPanel.setHorizontalScrollBar(null);
+    messagesPanel.setOpaque(false);
 
+    messageListView.setBackground(new java.awt.Color(0, 0, 0));
+    messageListView.setForeground(new java.awt.Color(255, 255, 255));
+    messageListView.setModel(new javax.swing.DefaultListModel<>());
+    messageListView.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+    messageListView.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+    messageListView.setOpaque(false);
+    messageListView.setSelectionBackground(new java.awt.Color(255, 255, 255));
+    messageListView.addAncestorListener(new javax.swing.event.AncestorListener() {
+      public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+        messageListViewAncestorAdded(evt);
+      }
+      public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+      }
+      public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+        messageListViewAncestorRemoved(evt);
+      }
+    });
+    messageListView.addMouseListener(new java.awt.event.MouseAdapter() {
+      public void mouseClicked(java.awt.event.MouseEvent evt) {
+        messageListViewMouseClicked(evt);
+      }
+    });
+    messageListView.setCellRenderer(new javax.swing.ListCellRenderer<MessagesListContent>() {
+      @Override
+      public java.awt.Component getListCellRendererComponent(
+        javax.swing.JList<? extends MessagesListContent> list,
+        MessagesListContent value,
+        int index,
+        boolean isSelected,
+        boolean cellHasFocus) {
+        return value;
+      }
+    });
     messagesPanel.setViewportView(messageListView);
 
     title.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+    title.setForeground(new java.awt.Color(255, 255, 255));
     title.setText("Messages");
-
-    jButton1.setText("jButton1");
-    jButton1.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        jButton1ActionPerformed(evt);
-      }
-    });
 
     javax.swing.GroupLayout messageListsLayout = new javax.swing.GroupLayout(messageLists);
     messageLists.setLayout(messageListsLayout);
     messageListsLayout.setHorizontalGroup(
       messageListsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addComponent(messagesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
       .addGroup(messageListsLayout.createSequentialGroup()
-        .addContainerGap()
-        .addGroup(messageListsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-          .addGroup(messageListsLayout.createSequentialGroup()
-            .addGap(0, 0, Short.MAX_VALUE)
-            .addComponent(jButton1)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(title)
-            .addGap(0, 0, Short.MAX_VALUE))
-          .addComponent(messagesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE))
-        .addContainerGap())
+        .addGap(160, 160, 160)
+        .addComponent(title)
+        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
     messageListsLayout.setVerticalGroup(
       messageListsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(messageListsLayout.createSequentialGroup()
-        .addContainerGap()
-        .addGroup(messageListsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(jButton1)
-          .addComponent(title))
+        .addGap(6, 6, 6)
+        .addComponent(title)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addComponent(messagesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 633, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addContainerGap(72, Short.MAX_VALUE))
+        .addComponent(messagesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addContainerGap())
     );
 
     add(messageLists, "pageList");
 
     messagePanel.setBackground(new java.awt.Color(0, 255, 102));
     messagePanel.setMaximumSize(new java.awt.Dimension(420, 750));
+    messagePanel.setOpaque(false);
     messagePanel.setPreferredSize(new java.awt.Dimension(420, 750));
     messagePanel.setRequestFocusEnabled(false);
 
     backMessageBtn.setBackground(new java.awt.Color(0, 0, 0));
     backMessageBtn.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-    backMessageBtn.setText("<-");
+    backMessageBtn.setForeground(new java.awt.Color(255, 255, 255));
+    backMessageBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cellphoneguiapp/njc/resources/back_msg_button.png"))); // NOI18N
+    backMessageBtn.setBorderPainted(false);
+    backMessageBtn.setContentAreaFilled(false);
     backMessageBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+    backMessageBtn.setDefaultCapable(false);
+    backMessageBtn.setOpaque(false);
     backMessageBtn.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         backMessageBtnActionPerformed(evt);
@@ -105,15 +233,50 @@ public class Messages extends javax.swing.JPanel {
     });
 
     senderLabel.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-    senderLabel.setText("jLabel1");
+    senderLabel.setForeground(new java.awt.Color(255, 255, 255));
+    senderLabel.setText(getSenderDisplayName());
     senderLabel.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-    senderLabel.setOpaque(true);
 
-    messageContent.setViewportView(jList1);
+    messageContent.setBackground(new java.awt.Color(25, 25, 25));
+    messageContent.setForeground(new java.awt.Color(255, 255, 255));
+    messageContent.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+    messageContent.setPreferredSize(new java.awt.Dimension(374, 516));
 
+    messages.setBackground(new java.awt.Color(25, 25, 25));
+    messages.setForeground(new java.awt.Color(255, 255, 255));
+    messages.setModel(getMessagesModel());
+    messages.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+    messages.setSelectionBackground(new java.awt.Color(0, 0, 0));
+    messages.setSelectionForeground(new java.awt.Color(255, 255, 255));
+    messages.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+    messages.setSelectionModel(new javax.swing.DefaultListSelectionModel() {
+      @Override
+      public void setAnchorSelectionIndex(int index) {}
+      @Override
+      public void setLeadSelectionIndex(int index) {}
+      @Override
+      public void setSelectionInterval(int index0, int index1) {}
+    });
+
+    messages.setCellRenderer(new javax.swing.ListCellRenderer<MessageContent>() {
+      @Override
+      public java.awt.Component getListCellRendererComponent(
+        javax.swing.JList<? extends MessageContent> list,
+        MessageContent value,
+        int index,
+        boolean isSelected,
+        boolean cellHasFocus) {
+        return value;
+      }
+    });
+    messageContent.setViewportView(messages);
+    messages.getAccessibleContext().setAccessibleName("");
+
+    sendBtn.setBackground(new java.awt.Color(29, 29, 29));
     sendBtn.setFont(new java.awt.Font("Comic Sans MS", 1, 36)); // NOI18N
     sendBtn.setForeground(new java.awt.Color(255, 255, 255));
-    sendBtn.setText(">");
+    sendBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cellphoneguiapp/njc/resources/send_msg_btn.png"))); // NOI18N
+    sendBtn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.black, java.awt.Color.darkGray, java.awt.Color.black));
     sendBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
     sendBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
     sendBtn.setIconTextGap(0);
@@ -123,86 +286,194 @@ public class Messages extends javax.swing.JPanel {
       }
     });
 
+    textMessageScroll.setBackground(new java.awt.Color(225, 225, 225));
+    textMessageScroll.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+    textMessageScroll.setForeground(new java.awt.Color(0, 0, 0));
     textMessageScroll.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
     textMessageScroll.setToolTipText("");
     textMessageScroll.setHorizontalScrollBar(null);
 
+    textMessage.setBackground(new java.awt.Color(225, 225, 225));
     textMessage.setColumns(20);
     textMessage.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-    textMessage.setForeground(new java.awt.Color(255, 255, 255));
+    textMessage.setForeground(new java.awt.Color(0, 0, 0));
     textMessage.setLineWrap(true);
-    textMessage.setRows(5);
+    textMessage.setRows(4);
     textMessage.setTabSize(2);
     textMessage.setToolTipText("Text Message");
     textMessage.setWrapStyleWord(true);
     textMessageScroll.setViewportView(textMessage);
     textMessage.getAccessibleContext().setAccessibleName("textMessage");
 
+    emojiBtn.setBackground(new java.awt.Color(29, 29, 29));
+    emojiBtn.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+    emojiBtn.setForeground(new java.awt.Color(255, 255, 255));
+    emojiBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cellphoneguiapp/njc/resources/emoticon_btn.png"))); // NOI18N
+    emojiBtn.setToolTipText("");
+    emojiBtn.setActionCommand("");
+    emojiBtn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.black, java.awt.Color.darkGray, java.awt.Color.black));
+    emojiBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+    emojiBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+    emojiBtn.setIconTextGap(0);
+    emojiBtn.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        emojiBtnActionPerformed(evt);
+      }
+    });
+
     javax.swing.GroupLayout messagePanelLayout = new javax.swing.GroupLayout(messagePanel);
     messagePanel.setLayout(messagePanelLayout);
     messagePanelLayout.setHorizontalGroup(
       messagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(messagePanelLayout.createSequentialGroup()
-        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        .addGroup(messagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGap(13, 13, 13)
+        .addGroup(messagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
           .addGroup(messagePanelLayout.createSequentialGroup()
-            .addComponent(textMessageScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-            .addComponent(sendBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, messagePanelLayout.createSequentialGroup()
-            .addGroup(messagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-              .addComponent(messageContent, javax.swing.GroupLayout.Alignment.LEADING)
-              .addGroup(messagePanelLayout.createSequentialGroup()
-                .addComponent(backMessageBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(senderLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)))
-            .addGap(17, 17, 17))))
+            .addComponent(textMessageScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(11, 11, 11)
+            .addGroup(messagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+              .addComponent(emojiBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addComponent(sendBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
+          .addGroup(messagePanelLayout.createSequentialGroup()
+            .addComponent(backMessageBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(senderLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        .addContainerGap())
+      .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, messagePanelLayout.createSequentialGroup()
+        .addContainerGap()
+        .addComponent(messageContent, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addGap(24, 24, 24))
     );
     messagePanelLayout.setVerticalGroup(
       messagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(messagePanelLayout.createSequentialGroup()
         .addContainerGap()
-        .addGroup(messagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(senderLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(backMessageBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addGroup(messagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+          .addComponent(senderLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+          .addComponent(backMessageBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addGap(6, 6, 6)
         .addComponent(messageContent, javax.swing.GroupLayout.PREFERRED_SIZE, 516, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-        .addGroup(messagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-          .addComponent(textMessageScroll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(sendBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addGap(23, 23, 23))
+        .addGroup(messagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+          .addGroup(messagePanelLayout.createSequentialGroup()
+            .addComponent(emojiBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(sendBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+          .addComponent(textMessageScroll))
+        .addContainerGap())
     );
 
     backMessageBtn.getAccessibleContext().setAccessibleName("backMessageBtn");
-    senderLabel.getAccessibleContext().setAccessibleName("senderLabel");
+    senderLabel.getAccessibleContext().setAccessibleName("");
+    new javax.swing.Timer(100, (java.awt.event.ActionEvent ev) -> {
+      senderLabel.setText(getSenderDisplayName());
+    }).start();
 
     add(messagePanel, "pageMessage");
   }// </editor-fold>//GEN-END:initComponents
 
   private void sendBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendBtnActionPerformed
-    // TODO add your handling code here:
+    if (!textMessage.getText().isBlank()) {
+      String txtmsg = textMessage.getText();
+      textMessage.setText("");
+      LocalDatabase db = LocalDatabase.DATABASES.get("messages");
+      int id = getSelectedMessageID();
+      java.util.Map<String, DataValue<?>> new_row = new java.util.HashMap<>();
+      new_row.put("sender_id", new DataValue<>(id));
+      new_row.put("sender_msg", DataValue.getDefaultEmptyValue("string"));
+      new_row.put("my_msg", new DataValue<>(txtmsg));
+      new_row.put("date", new DataValue<>(Helper.DateToStringFormat()));
+      try {
+        db.insertRow(new_row);
+      } catch (LocalDatabaseError ex) {
+        System.err.println(ex);
+      }
+    }
   }//GEN-LAST:event_sendBtnActionPerformed
 
-  private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    // TODO add your handling code here:
-    ((java.awt.CardLayout)this.getLayout()).next(this);
-  }//GEN-LAST:event_jButton1ActionPerformed
-
   private void backMessageBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backMessageBtnActionPerformed
-    // TODO add your handling code here:
     ((java.awt.CardLayout)this.getLayout()).previous(this);
   }//GEN-LAST:event_backMessageBtnActionPerformed
 
+  private void messageListViewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_messageListViewMouseClicked
+    java.awt.Point p = evt.getPoint();
+    javax.swing.JList<MessagesListContent> list = (javax.swing.JList<MessagesListContent>) evt.getSource();
+    int indx = list.locationToIndex(p);
+    if (indx > -1) {
+      MessagesListContent panel = (MessagesListContent) list.getModel().getElementAt(indx);
+      panel.getButton().doClick();
+    }
+  }//GEN-LAST:event_messageListViewMouseClicked
+
+  private void messageListViewAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_messageListViewAncestorAdded
+    Messages thisPanel = this;
+    javax.swing.JList<MessagesListContent> src = (javax.swing.JList<MessagesListContent>) evt.getSource();
+    javax.swing.DefaultListModel<MessagesListContent> model = (javax.swing.DefaultListModel<MessagesListContent>) src.getModel();
+    java.util.List<java.util.Map<String, DataValue<?>>> rows;
+    rows = LocalDatabase.DATABASES.get("messageList").selectAllRows();
+    for (java.util.Map<String, DataValue<?>> row: rows) {
+      int _id = row.get("_id").getInt();
+      String sender = row.get("sender_name").getString();
+      String num = row.get("number").getString();
+      MessagesListContent mlc = new MessagesListContent(_id, num, sender);
+      mlc.setButtonAction((java.awt.event.ActionEvent e) -> {
+        MessagesListContent srcContent = (MessagesListContent) e.getSource();
+        // set sender id
+        setSelectedMessageID(srcContent.getSenderId());
+        // show the next panel
+        ((java.awt.CardLayout)thisPanel.getLayout()).next(thisPanel);
+      });
+      model.addElement(mlc);
+    }
+  }//GEN-LAST:event_messageListViewAncestorAdded
+
+  private void messageListViewAncestorRemoved(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_messageListViewAncestorRemoved
+    ((javax.swing.DefaultListModel<MessagesListContent>) ((javax.swing.JList<MessagesListContent>) evt.getSource()).getModel()).removeAllElements();
+  }//GEN-LAST:event_messageListViewAncestorRemoved
+
+  private void emojiBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emojiBtnActionPerformed
+    javax.swing.JFrame frame = new javax.swing.JFrame("Emoticons");
+    frame.setDefaultCloseOperation(javax.swing.JFrame.DISPOSE_ON_CLOSE);
+    frame.setSize(120, 150);
+
+    javax.swing.JPanel emoticonsPanel = new javax.swing.JPanel(new java.awt.GridLayout(3, 3));
+
+    javax.swing.ImageIcon[] emoticons = {
+      new javax.swing.ImageIcon(Helper.getImage("emoticon_smiley.png")),
+      new javax.swing.ImageIcon(Helper.getImage("emoticon_sad.png")),
+      new javax.swing.ImageIcon(Helper.getImage("emoticon_angry.png")),
+      new javax.swing.ImageIcon(Helper.getImage("emoticon_surprised.png")),
+      new javax.swing.ImageIcon(Helper.getImage("emoticon_laughing.png")),
+      new javax.swing.ImageIcon(Helper.getImage("emoticon_cool.png")),
+      new javax.swing.ImageIcon(Helper.getImage("emoticon_heart.png")),
+      new javax.swing.ImageIcon(Helper.getImage("emoticon_star.png")),
+      new javax.swing.ImageIcon(Helper.getImage("emoticon_kiss.png"))
+    };
+    
+    String[] emoj = {":)", ":(", ">:(", ":O", ">_<", "B-)", "<3", "*_*", ":*"};
+
+    for (int i = 0; i < emoticons.length; i++) {
+        javax.swing.JButton button = new javax.swing.JButton(emoticons[i]);
+        final int j = i;
+        button.addActionListener((java.awt.event.ActionEvent ev) -> {
+          textMessage.setText(textMessage.getText() + emoj[j]);
+          frame.dispose();
+        });
+        emoticonsPanel.add(button);
+    }
+    frame.setIconImage(Helper.iconToImage(new javax.swing.ImageIcon(Helper.getImage("emoticon_smiley.png"))));
+    frame.setAlwaysOnTop(true);
+    frame.setLocationRelativeTo(this);
+    frame.add(emoticonsPanel);
+    frame.setVisible(true);
+  }//GEN-LAST:event_emojiBtnActionPerformed
+  
+  
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
-  private final javax.swing.JButton backMessageBtn = new javax.swing.JButton();
-  private javax.swing.JButton jButton1;
-  private javax.swing.JList<javax.swing.JPanel> jList1;
-  private final javax.swing.JScrollPane messageContent = new javax.swing.JScrollPane();
-  private final javax.swing.JList<javax.swing.JButton> messageListView = new javax.swing.JList<>();
-  private javax.swing.JPanel messageLists;
-  private javax.swing.JPanel messagePanel;
+  private final javax.swing.JButton emojiBtn = new javax.swing.JButton();
+  private final javax.swing.JList<MessagesListContent> messageListView = new javax.swing.JList<>();
+  private javax.swing.JList<MessageContent> messages;
   private final javax.swing.JButton sendBtn = new javax.swing.JButton();
   private final javax.swing.JLabel senderLabel = new javax.swing.JLabel();
   private final javax.swing.JTextArea textMessage = new javax.swing.JTextArea();

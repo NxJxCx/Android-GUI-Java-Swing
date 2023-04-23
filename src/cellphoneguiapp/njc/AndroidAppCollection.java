@@ -5,16 +5,15 @@
 package cellphoneguiapp.njc;
 
 import cellphoneguiapp.njc.interfaces.AndroidHomeOperations;
-import java.util.ArrayList;
 
 /**
  *
- * @author canet
+ * @author Neil Jason Canete
  */
 public class AndroidAppCollection implements AndroidHomeOperations {
   private final HomePanel parentPanel;
-  private final ArrayList<AndroidApp> apps = new ArrayList<>();
-  private final ArrayList<String> openApps = new ArrayList<>();
+  private final java.util.ArrayList<AndroidApp> apps = new java.util.ArrayList<>();
+  private final java.util.List<String> openApps = new java.util.ArrayList<>();
   
   public AndroidAppCollection(HomePanel parent_android) {
     parentPanel = parent_android;

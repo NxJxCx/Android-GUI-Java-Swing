@@ -22,26 +22,13 @@ public class AndroidApp extends AbstractAndroidApp {
   public AndroidApp(String app_name, HomePanel parent_android) throws AndroidAppError {
     
     switch (app_name) {
-      case "Call":
-        setPanel(new Call());
-        break;
-      case "Messages":
-        setPanel(new Messages());
-        break;
-      case "Contacts":
-        setPanel(new Contacts());
-        break;
-      case "Facebook":
-        setPanel(new Facebook());
-        break;
-      case "Gallery":
-        setPanel(new Gallery());
-        break;
-      case "Camera":
-        setPanel(new Camera());
-        break;
-      default:
-        throw new AndroidAppError("App named '" + app_name + "' is not a registered app.");
+      case "Call" -> setPanel(new Call());
+      case "Messages" -> setPanel(new Messages());
+      case "Contacts" -> setPanel(new Contacts());
+      case "Facebook" -> setPanel(new Facebook());
+      case "Gallery" -> setPanel(new Gallery());
+      case "Camera" -> setPanel(new Camera());
+      default -> throw new AndroidAppError("App named '" + app_name + "' is not a registered app.");
     }
     this.appname = app_name;
     this.android = parent_android;

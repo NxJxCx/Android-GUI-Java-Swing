@@ -1,12 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
+
 package cellphoneguiapp.njc.Apps;
 
 /**
  *
- * @author canet
+ * @author Neil Jason Canete
  */
 public class Contacts extends javax.swing.JPanel {
 
@@ -26,30 +23,18 @@ public class Contacts extends javax.swing.JPanel {
   // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
   private void initComponents() {
 
-    jLabel1 = new javax.swing.JLabel();
+    final javax.swing.JLabel contacts_content = new javax.swing.JLabel();
 
-    jLabel1.setText("Contacts");
+    setLayout(new java.awt.CardLayout());
 
-    javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-    this.setLayout(layout);
-    layout.setHorizontalGroup(
-      layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-        .addContainerGap(189, Short.MAX_VALUE)
-        .addComponent(jLabel1)
-        .addGap(186, 186, 186))
-    );
-    layout.setVerticalGroup(
-      layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(layout.createSequentialGroup()
-        .addGap(106, 106, 106)
-        .addComponent(jLabel1)
-        .addContainerGap(629, Short.MAX_VALUE))
-    );
+    contacts_content.setBackground(new java.awt.Color(0, 0, 0));
+    contacts_content.setForeground(new java.awt.Color(255, 255, 255));
+    contacts_content.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+    contacts_content.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cellphoneguiapp/njc/resources/contact_screen.jpg"))); // NOI18N
+    add(contacts_content, "card2");
   }// </editor-fold>//GEN-END:initComponents
 
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
-  private javax.swing.JLabel jLabel1;
   // End of variables declaration//GEN-END:variables
 }

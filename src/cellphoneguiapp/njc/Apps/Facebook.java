@@ -1,12 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
+
 package cellphoneguiapp.njc.Apps;
 
 /**
  *
- * @author canet
+ * @author Neil Jason Canete
  */
 public class Facebook extends javax.swing.JPanel {
 

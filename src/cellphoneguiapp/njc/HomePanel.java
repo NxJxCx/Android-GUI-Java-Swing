@@ -554,15 +554,15 @@ public class HomePanel extends javax.swing.JPanel {
       public void actionPerformed(java.awt.event.ActionEvent e) {
         counter++;
         switch(counter) {
-          case 1:
+          case 1 -> {
             apps.closeAllApps();
             ((java.awt.CardLayout)container.getLayout()).next(container);
             System.out.println("Turning Off Android...");
-            break;
-          case 23:
+          }
+          case 23 -> {
             ((javax.swing.Timer)e.getSource()).stop();
             ((java.awt.CardLayout)container.getLayout()).next(container);
-            break;
+          }
         }
       }
     }).start();

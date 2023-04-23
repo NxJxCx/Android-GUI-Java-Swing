@@ -1,13 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 
 package cellphoneguiapp.njc.Apps;
 
 /**
  *
- * @author canet
+ * @author Neil Jason Canete
  */
 public class Call extends javax.swing.JPanel {
 
@@ -25,33 +21,538 @@ public class Call extends javax.swing.JPanel {
   // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
   private void initComponents() {
 
-    jLabel1 = new javax.swing.JLabel();
+    final javax.swing.JPanel callNumpadPanel = new javax.swing.JPanel();
+    final javax.swing.JPanel numpadPanel = new javax.swing.JPanel();
+    final javax.swing.JButton num1 = new javax.swing.JButton();
+    final javax.swing.JButton num2 = new javax.swing.JButton();
+    final javax.swing.JButton num3 = new javax.swing.JButton();
+    final javax.swing.JButton num4 = new javax.swing.JButton();
+    final javax.swing.JButton num5 = new javax.swing.JButton();
+    final javax.swing.JButton num6 = new javax.swing.JButton();
+    final javax.swing.JButton num7 = new javax.swing.JButton();
+    final javax.swing.JButton num8 = new javax.swing.JButton();
+    final javax.swing.JButton num9 = new javax.swing.JButton();
+    final javax.swing.JButton numAsterisk = new javax.swing.JButton();
+    final javax.swing.JButton num0 = new javax.swing.JButton();
+    final javax.swing.JButton numHash = new javax.swing.JButton();
+    final javax.swing.JButton callBtn = new javax.swing.JButton();
+    final javax.swing.JPanel displayInputPanel = new javax.swing.JPanel();
+    inputTextbox = new javax.swing.JTextField();
+    final javax.swing.JButton backspaceBtn = new javax.swing.JButton();
+    final javax.swing.JPanel callingPanel = new javax.swing.JPanel();
+    final javax.swing.JButton callingIconImage = new javax.swing.JButton();
+    final javax.swing.JLabel philLabel = new javax.swing.JLabel();
+    final javax.swing.JButton endCallBtn = new javax.swing.JButton();
+    final javax.swing.JButton muteBtn = new javax.swing.JButton();
+    final javax.swing.JButton muteBtn1 = new javax.swing.JButton();
+    final javax.swing.JButton muteBtn2 = new javax.swing.JButton();
 
-    jLabel1.setText("Call Panel");
+    setBackground(new java.awt.Color(0, 0, 0));
+    setOpaque(false);
+    setLayout(new java.awt.CardLayout());
 
-    javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-    this.setLayout(layout);
-    layout.setHorizontalGroup(
-      layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(layout.createSequentialGroup()
-        .addGap(172, 172, 172)
-        .addComponent(jLabel1)
-        .addContainerGap(197, Short.MAX_VALUE))
+    callNumpadPanel.setBackground(new java.awt.Color(0, 0, 0));
+    callNumpadPanel.setForeground(new java.awt.Color(255, 255, 255));
+    callNumpadPanel.setMaximumSize(new java.awt.Dimension(410, 750));
+    callNumpadPanel.setOpaque(false);
+    callNumpadPanel.setPreferredSize(new java.awt.Dimension(410, 750));
+
+    numpadPanel.setBackground(new java.awt.Color(48, 48, 57));
+    numpadPanel.setForeground(new java.awt.Color(255, 255, 255));
+
+    num1.setBackground(new java.awt.Color(24, 24, 25));
+    num1.setFont(new java.awt.Font("Comic Sans MS", 0, 48)); // NOI18N
+    num1.setForeground(new java.awt.Color(255, 255, 255));
+    num1.setText("1");
+    num1.setBorder(new javax.swing.border.MatteBorder(null));
+    num1.setDefaultCapable(false);
+    num1.setFocusPainted(false);
+    num1.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        numpadBtnActionPerformed(evt);
+      }
+    });
+
+    num2.setBackground(new java.awt.Color(24, 24, 25));
+    num2.setFont(new java.awt.Font("Comic Sans MS", 0, 48)); // NOI18N
+    num2.setForeground(new java.awt.Color(255, 255, 255));
+    num2.setText("2");
+    num2.setBorder(new javax.swing.border.MatteBorder(null));
+    num2.setDefaultCapable(false);
+    num2.setFocusPainted(false);
+    num2.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        numpadBtnActionPerformed(evt);
+      }
+    });
+
+    num3.setBackground(new java.awt.Color(24, 24, 25));
+    num3.setFont(new java.awt.Font("Comic Sans MS", 0, 48)); // NOI18N
+    num3.setForeground(new java.awt.Color(255, 255, 255));
+    num3.setText("3");
+    num3.setBorder(new javax.swing.border.MatteBorder(null));
+    num3.setDefaultCapable(false);
+    num3.setFocusPainted(false);
+    num3.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        numpadBtnActionPerformed(evt);
+      }
+    });
+
+    num4.setBackground(new java.awt.Color(24, 24, 25));
+    num4.setFont(new java.awt.Font("Comic Sans MS", 0, 48)); // NOI18N
+    num4.setForeground(new java.awt.Color(255, 255, 255));
+    num4.setText("4");
+    num4.setBorder(new javax.swing.border.MatteBorder(null));
+    num4.setDefaultCapable(false);
+    num4.setFocusPainted(false);
+    num4.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        numpadBtnActionPerformed(evt);
+      }
+    });
+
+    num5.setBackground(new java.awt.Color(24, 24, 25));
+    num5.setFont(new java.awt.Font("Comic Sans MS", 0, 48)); // NOI18N
+    num5.setForeground(new java.awt.Color(255, 255, 255));
+    num5.setText("5");
+    num5.setBorder(new javax.swing.border.MatteBorder(null));
+    num5.setDefaultCapable(false);
+    num5.setFocusPainted(false);
+    num5.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        numpadBtnActionPerformed(evt);
+      }
+    });
+
+    num6.setBackground(new java.awt.Color(24, 24, 25));
+    num6.setFont(new java.awt.Font("Comic Sans MS", 0, 48)); // NOI18N
+    num6.setForeground(new java.awt.Color(255, 255, 255));
+    num6.setText("6");
+    num6.setBorder(new javax.swing.border.MatteBorder(null));
+    num6.setDefaultCapable(false);
+    num6.setFocusPainted(false);
+    num6.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        numpadBtnActionPerformed(evt);
+      }
+    });
+
+    num7.setBackground(new java.awt.Color(24, 24, 25));
+    num7.setFont(new java.awt.Font("Comic Sans MS", 0, 48)); // NOI18N
+    num7.setForeground(new java.awt.Color(255, 255, 255));
+    num7.setText("7");
+    num7.setBorder(new javax.swing.border.MatteBorder(null));
+    num7.setDefaultCapable(false);
+    num7.setFocusPainted(false);
+    num7.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        numpadBtnActionPerformed(evt);
+      }
+    });
+
+    num8.setBackground(new java.awt.Color(24, 24, 25));
+    num8.setFont(new java.awt.Font("Comic Sans MS", 0, 48)); // NOI18N
+    num8.setForeground(new java.awt.Color(255, 255, 255));
+    num8.setText("8");
+    num8.setBorder(new javax.swing.border.MatteBorder(null));
+    num8.setDefaultCapable(false);
+    num8.setFocusPainted(false);
+    num8.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        numpadBtnActionPerformed(evt);
+      }
+    });
+
+    num9.setBackground(new java.awt.Color(24, 24, 25));
+    num9.setFont(new java.awt.Font("Comic Sans MS", 0, 48)); // NOI18N
+    num9.setForeground(new java.awt.Color(255, 255, 255));
+    num9.setText("9");
+    num9.setBorder(new javax.swing.border.MatteBorder(null));
+    num9.setDefaultCapable(false);
+    num9.setFocusPainted(false);
+    num9.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        numpadBtnActionPerformed(evt);
+      }
+    });
+
+    numAsterisk.setBackground(new java.awt.Color(24, 24, 25));
+    numAsterisk.setFont(new java.awt.Font("Comic Sans MS", 0, 48)); // NOI18N
+    numAsterisk.setForeground(new java.awt.Color(255, 255, 255));
+    numAsterisk.setText("*");
+    numAsterisk.setBorder(new javax.swing.border.MatteBorder(null));
+    numAsterisk.setDefaultCapable(false);
+    numAsterisk.setFocusPainted(false);
+    numAsterisk.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        numpadBtnActionPerformed(evt);
+      }
+    });
+
+    num0.setBackground(new java.awt.Color(24, 24, 25));
+    num0.setFont(new java.awt.Font("Comic Sans MS", 0, 48)); // NOI18N
+    num0.setForeground(new java.awt.Color(255, 255, 255));
+    num0.setText("0");
+    num0.setBorder(new javax.swing.border.MatteBorder(null));
+    num0.setDefaultCapable(false);
+    num0.setFocusPainted(false);
+    num0.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        numpadBtnActionPerformed(evt);
+      }
+    });
+
+    numHash.setBackground(new java.awt.Color(24, 24, 25));
+    numHash.setFont(new java.awt.Font("Comic Sans MS", 0, 48)); // NOI18N
+    numHash.setForeground(new java.awt.Color(255, 255, 255));
+    numHash.setText("#");
+    numHash.setBorder(new javax.swing.border.MatteBorder(null));
+    numHash.setDefaultCapable(false);
+    numHash.setFocusPainted(false);
+    numHash.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        numpadBtnActionPerformed(evt);
+      }
+    });
+
+    callBtn.setBackground(new java.awt.Color(102, 255, 102));
+    callBtn.setFont(new java.awt.Font("Comic Sans MS", 0, 48)); // NOI18N
+    callBtn.setForeground(new java.awt.Color(42, 42, 42));
+    callBtn.setText("Call");
+    callBtn.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+    callBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+    callBtn.setFocusPainted(false);
+    callBtn.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        callBtnActionPerformed(evt);
+      }
+    });
+
+    javax.swing.GroupLayout numpadPanelLayout = new javax.swing.GroupLayout(numpadPanel);
+    numpadPanel.setLayout(numpadPanelLayout);
+    numpadPanelLayout.setHorizontalGroup(
+      numpadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(numpadPanelLayout.createSequentialGroup()
+        .addContainerGap()
+        .addGroup(numpadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addGroup(numpadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(numpadPanelLayout.createSequentialGroup()
+              .addComponent(num1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addGap(18, 18, 18)
+              .addComponent(num2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addGap(18, 18, 18)
+              .addComponent(num3, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(numpadPanelLayout.createSequentialGroup()
+              .addComponent(num4, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addGap(18, 18, 18)
+              .addComponent(num5, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addGap(18, 18, 18)
+              .addComponent(num6, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, numpadPanelLayout.createSequentialGroup()
+              .addComponent(num7, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addGap(18, 18, 18)
+              .addComponent(num8, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addGap(18, 18, 18)
+              .addComponent(num9, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
+          .addGroup(numpadPanelLayout.createSequentialGroup()
+            .addComponent(numAsterisk, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(18, 18, 18)
+            .addComponent(num0, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(18, 18, 18)
+            .addComponent(numHash, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+          .addGroup(numpadPanelLayout.createSequentialGroup()
+            .addGap(133, 133, 133)
+            .addComponent(callBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        .addContainerGap())
     );
-    layout.setVerticalGroup(
-      layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(layout.createSequentialGroup()
-        .addGap(45, 45, 45)
-        .addComponent(jLabel1)
-        .addContainerGap(690, Short.MAX_VALUE))
+    numpadPanelLayout.setVerticalGroup(
+      numpadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(numpadPanelLayout.createSequentialGroup()
+        .addGap(21, 21, 21)
+        .addGroup(numpadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+          .addComponent(num1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(num3, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(num2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addGap(25, 25, 25)
+        .addGroup(numpadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+          .addComponent(num4, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(num6, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(num5, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addGap(25, 25, 25)
+        .addGroup(numpadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+          .addComponent(num7, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(num9, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(num8, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addGap(25, 25, 25)
+        .addGroup(numpadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+          .addComponent(numAsterisk, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(numHash, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(num0, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addGap(30, 30, 30)
+        .addComponent(callBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addGap(45, 45, 45))
     );
+
+    displayInputPanel.setBackground(new java.awt.Color(48, 48, 57));
+    displayInputPanel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(126, 126, 126), 1, true));
+    displayInputPanel.setForeground(new java.awt.Color(255, 255, 255));
+
+    inputTextbox.setEditable(false);
+    inputTextbox.setBackground(new java.awt.Color(0, 0, 0));
+    inputTextbox.setFont(new java.awt.Font("Comic Sans MS", 0, 36)); // NOI18N
+    inputTextbox.setForeground(new java.awt.Color(255, 255, 255));
+    inputTextbox.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+    inputTextbox.setToolTipText("");
+    inputTextbox.setActionCommand("<Not Set>");
+    inputTextbox.setBorder(null);
+    inputTextbox.setOpaque(false);
+
+    backspaceBtn.setBackground(new java.awt.Color(0, 0, 0));
+    backspaceBtn.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
+    backspaceBtn.setForeground(new java.awt.Color(255, 255, 255));
+    backspaceBtn.setText("<=");
+    backspaceBtn.setToolTipText("");
+    backspaceBtn.setActionCommand("");
+    backspaceBtn.setBorder(null);
+    backspaceBtn.setBorderPainted(false);
+    backspaceBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+    backspaceBtn.setDefaultCapable(false);
+    backspaceBtn.setFocusPainted(false);
+    backspaceBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+    backspaceBtn.setIconTextGap(0);
+    backspaceBtn.setMargin(new java.awt.Insets(0, 0, 0, 0));
+    backspaceBtn.setOpaque(false);
+    backspaceBtn.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        backspaceBtnActionPerformed(evt);
+      }
+    });
+
+    javax.swing.GroupLayout displayInputPanelLayout = new javax.swing.GroupLayout(displayInputPanel);
+    displayInputPanel.setLayout(displayInputPanelLayout);
+    displayInputPanelLayout.setHorizontalGroup(
+      displayInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(displayInputPanelLayout.createSequentialGroup()
+        .addGap(71, 71, 71)
+        .addComponent(inputTextbox, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addComponent(backspaceBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+    );
+    displayInputPanelLayout.setVerticalGroup(
+      displayInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addComponent(backspaceBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+      .addComponent(inputTextbox, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
+    );
+
+    backspaceBtn.getAccessibleContext().setAccessibleName("backspaceBtn");
+
+    callTitle.setBackground(new java.awt.Color(0, 0, 0));
+    callTitle.setFont(new java.awt.Font("Comic Sans MS", 1, 48)); // NOI18N
+    callTitle.setForeground(new java.awt.Color(255, 255, 255));
+    callTitle.setText("Call");
+
+    javax.swing.GroupLayout callNumpadPanelLayout = new javax.swing.GroupLayout(callNumpadPanel);
+    callNumpadPanel.setLayout(callNumpadPanelLayout);
+    callNumpadPanelLayout.setHorizontalGroup(
+      callNumpadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(callNumpadPanelLayout.createSequentialGroup()
+        .addComponent(numpadPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addGap(0, 0, 0))
+      .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, callNumpadPanelLayout.createSequentialGroup()
+        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        .addComponent(callTitle)
+        .addGap(158, 158, 158))
+      .addComponent(displayInputPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+    );
+    callNumpadPanelLayout.setVerticalGroup(
+      callNumpadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(callNumpadPanelLayout.createSequentialGroup()
+        .addGap(0, 0, 0)
+        .addComponent(callTitle)
+        .addGap(40, 40, 40)
+        .addComponent(displayInputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addGap(0, 0, 0)
+        .addComponent(numpadPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addGap(0, 0, 0))
+    );
+
+    add(callNumpadPanel, "numpadPage");
+
+    callingPanel.setBackground(new java.awt.Color(0, 0, 0));
+    callingPanel.setForeground(new java.awt.Color(255, 255, 255));
+    callingPanel.setToolTipText("");
+    callingPanel.setMaximumSize(new java.awt.Dimension(410, 750));
+    callingPanel.setPreferredSize(new java.awt.Dimension(410, 750));
+
+    callingIconImage.setBackground(new java.awt.Color(25, 25, 25));
+    callingIconImage.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+    callingIconImage.setForeground(new java.awt.Color(255, 255, 255));
+    callingIconImage.setText("Calling...");
+    callingIconImage.setActionCommand("");
+    callingIconImage.setBorderPainted(false);
+    callingIconImage.setContentAreaFilled(false);
+    callingIconImage.setDefaultCapable(false);
+    callingIconImage.setFocusPainted(false);
+    callingIconImage.setFocusable(false);
+    callingIconImage.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+    callingIconImage.setIconTextGap(0);
+    callingIconImage.setOpaque(true);
+    callingIconImage.setRequestFocusEnabled(false);
+    callingIconImage.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+    callingIconImage.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+
+    callingDisplayNumber.setBackground(new java.awt.Color(0, 0, 0));
+    callingDisplayNumber.setFont(new java.awt.Font("Comic Sans MS", 0, 48)); // NOI18N
+    callingDisplayNumber.setForeground(new java.awt.Color(255, 255, 255));
+    callingDisplayNumber.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+    callingDisplayNumber.setText("09123456789");
+
+    philLabel.setBackground(new java.awt.Color(0, 0, 0));
+    philLabel.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+    philLabel.setForeground(new java.awt.Color(255, 255, 255));
+    philLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+    philLabel.setText("Philippines");
+    philLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+    endCallBtn.setBackground(new java.awt.Color(255, 55, 55));
+    endCallBtn.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
+    endCallBtn.setForeground(new java.awt.Color(255, 255, 255));
+    endCallBtn.setText("End");
+    endCallBtn.setBorderPainted(false);
+    endCallBtn.setFocusPainted(false);
+    endCallBtn.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        endCallBtnActionPerformed(evt);
+      }
+    });
+
+    muteBtn.setBackground(new java.awt.Color(51, 51, 51));
+    muteBtn.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+    muteBtn.setForeground(new java.awt.Color(255, 255, 255));
+    muteBtn.setText("Mute");
+    muteBtn.setActionCommand("");
+    muteBtn.setBorderPainted(false);
+    muteBtn.setDefaultCapable(false);
+    muteBtn.setFocusPainted(false);
+    muteBtn.setFocusable(false);
+    muteBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+    muteBtn.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+    muteBtn.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+
+    muteBtn1.setBackground(new java.awt.Color(51, 51, 51));
+    muteBtn1.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+    muteBtn1.setForeground(new java.awt.Color(255, 255, 255));
+    muteBtn1.setText("Speaker");
+    muteBtn1.setActionCommand("");
+    muteBtn1.setBorderPainted(false);
+    muteBtn1.setDefaultCapable(false);
+    muteBtn1.setFocusPainted(false);
+    muteBtn1.setFocusable(false);
+    muteBtn1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+    muteBtn1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+    muteBtn1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+
+    muteBtn2.setBackground(new java.awt.Color(51, 51, 51));
+    muteBtn2.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+    muteBtn2.setForeground(new java.awt.Color(255, 255, 255));
+    muteBtn2.setText("Keypad");
+    muteBtn2.setActionCommand("");
+    muteBtn2.setBorderPainted(false);
+    muteBtn2.setDefaultCapable(false);
+    muteBtn2.setFocusPainted(false);
+    muteBtn2.setFocusable(false);
+    muteBtn2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+    muteBtn2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+    muteBtn2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+
+    javax.swing.GroupLayout callingPanelLayout = new javax.swing.GroupLayout(callingPanel);
+    callingPanel.setLayout(callingPanelLayout);
+    callingPanelLayout.setHorizontalGroup(
+      callingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, callingPanelLayout.createSequentialGroup()
+        .addContainerGap()
+        .addComponent(philLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addGap(135, 135, 135))
+      .addGroup(callingPanelLayout.createSequentialGroup()
+        .addGroup(callingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addGroup(callingPanelLayout.createSequentialGroup()
+            .addGap(29, 29, 29)
+            .addGroup(callingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+              .addGroup(callingPanelLayout.createSequentialGroup()
+                .addComponent(muteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50)
+                .addGroup(callingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                  .addComponent(endCallBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                  .addGroup(callingPanelLayout.createSequentialGroup()
+                    .addComponent(muteBtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(50, 50, 50)
+                    .addComponent(muteBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))))
+              .addComponent(callingDisplayNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)))
+          .addGroup(callingPanelLayout.createSequentialGroup()
+            .addGap(134, 134, 134)
+            .addComponent(callingIconImage, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        .addGap(29, 29, 29))
+    );
+    callingPanelLayout.setVerticalGroup(
+      callingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(callingPanelLayout.createSequentialGroup()
+        .addGap(34, 34, 34)
+        .addComponent(callingIconImage, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addComponent(callingDisplayNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addComponent(philLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addGap(79, 79, 79)
+        .addGroup(callingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addComponent(muteBtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(muteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(muteBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addGap(90, 90, 90)
+        .addComponent(endCallBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addGap(76, 76, 76))
+    );
+
+    add(callingPanel, "callingPage");
 
     getAccessibleContext().setAccessibleName("CallPanel");
   }// </editor-fold>//GEN-END:initComponents
 
+  private void backspaceBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backspaceBtnActionPerformed
+    String text = inputTextbox.getText();
+    if (!text.isEmpty()) {
+      inputTextbox.setText(text.substring(0, text.length()-1));
+    }
+  }//GEN-LAST:event_backspaceBtnActionPerformed
+
+  private void numpadBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numpadBtnActionPerformed
+    inputTextbox.setText(inputTextbox.getText() + evt.getActionCommand());
+  }//GEN-LAST:event_numpadBtnActionPerformed
+
+  private void callBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_callBtnActionPerformed
+    String callNumber = inputTextbox.getText();
+    if (!callNumber.isEmpty()) {
+      callingDisplayNumber.setText(callNumber);
+      ((java.awt.CardLayout)this.getLayout()).next(this); // proceed and switch to calling panel
+    }
+  }//GEN-LAST:event_callBtnActionPerformed
+
+  private void endCallBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_endCallBtnActionPerformed
+    ((javax.swing.JButton)evt.getSource()).setEnabled(false); // disable the end call button
+    new javax.swing.Timer(500, (java.awt.event.ActionEvent e) -> { // waiting for 500 milliseconds and execute end call
+      ((javax.swing.Timer)e.getSource()).stop();
+      callingDisplayNumber.setText("");
+      ((java.awt.CardLayout)this.getLayout()).previous(this); // proceed and switch back to numpad panel
+      ((javax.swing.JButton)evt.getSource()).setEnabled(true); // enable back the disabled end call button
+    }).start();
+    
+  }//GEN-LAST:event_endCallBtnActionPerformed
+
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
-  private javax.swing.JLabel jLabel1;
+  private final javax.swing.JLabel callTitle = new javax.swing.JLabel();
+  private final javax.swing.JLabel callingDisplayNumber = new javax.swing.JLabel();
+  private javax.swing.JTextField inputTextbox;
   // End of variables declaration//GEN-END:variables
 
 }
